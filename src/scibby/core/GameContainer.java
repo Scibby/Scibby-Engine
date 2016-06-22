@@ -1,12 +1,8 @@
 package scibby.core;
 
-import static scibby.util.Util.*;
-
 import java.io.Serializable;
 
 import javax.swing.JFrame;
-
-import scibby.util.Util.Severity;
 
 public class GameContainer extends JFrame implements Runnable, Serializable{
 
@@ -20,26 +16,73 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 
 	public int maxFrames;
 
-	public GameContainer(int WIDTH, int HEIGHT, int MAX_FRAMES){
-		this.width = WIDTH;
-		this.height = HEIGHT;
-		this.maxFrames = MAX_FRAMES;
-		setSize(WIDTH, HEIGHT);
+	public String title;
+
+	public GameContainer(int width, int height, int maxFrames){
+		this.width = width;
+		this.height = height;
+		this.maxFrames = maxFrames;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setVisible(true);
+	}
+
+	public GameContainer(int width, int height, int maxFrames, String title){
+		this.width = width;
+		this.height = height;
+		this.maxFrames = maxFrames;
+		this.title = title;
+
+		setTitle(title);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setVisible(true);
+	}
+
+	private void init(){
+	
+	}
+
+	private void tick(){
+
 	}
 
 	@Override
 	public void run(){
 		while(running){
-			
+
+			init();
+
+			long initialNanoTime = System.nanoTime();
+			double ticksPerSecond = 1000000000 / maxFrames;
+			double delta = 0;
+			int updates = 0;
+			int frames = 0;
+			long milli = System.currentTimeMillis();
+			while(running){
+				long now = System.nanoTime();
+				delta += (now - initialNanoTime) / ticksPerSecond;
+				initialNanoTime = now;
+				if(delta >= 1){
+					tick();
+					updates++;
+					//render
+					frames++;
+					delta--;
+				}
+
+				if(System.currentTimeMillis() - milli > 1000){
+					milli += 1000;
+					updates = 0;
+					frames = 0;
+				}
+			}
+			System.out.println(updates + ", " + frames);
 		}
 
 	}
-
-	/**
-	 * Starts the thread.
-	 */
+	
 	public synchronized void start(){
 		if(running) return;
 
@@ -48,9 +91,6 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		thread.start();
 	}
 
-	/**
-	 * Stops the thread.
-	 */
 	public synchronized void stop(){
 		if(!running) return;
 
@@ -61,6 +101,14 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 			e.printStackTrace();
 		}
 		System.exit(1);
+	}
+
+	public int getWidth(){
+		return width;
+	}
+
+	public int getHeight(){
+		return height;
 	}
 
 }
