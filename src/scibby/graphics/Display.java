@@ -7,17 +7,23 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.io.Serializable;
 
+import scibby.core.GameContainer;
+import scibby.states.GameStateManager;
+
 public class Display extends Canvas implements Serializable{
 
 	private int width;
 
 	private int height;
+	
+	private GameContainer gc;
 
-	public Display(final int width, final int height){
+	public Display(final int width, final int height, GameContainer gc){
 
 		this.width = width;
 		this.height = height;
-
+		this.gc = gc;
+		
 		Dimension dim = new Dimension(width, height);
 		setMinimumSize(dim);
 		setPreferredSize(dim);
@@ -36,6 +42,8 @@ public class Display extends Canvas implements Serializable{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
 
+		GameStateManager.render(g);
+		
 		g.dispose();
 
 		bs.show();

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.swing.JFrame;
 
 import scibby.graphics.Display;
+import scibby.states.GameStateManager;
 
 public class GameContainer extends JFrame implements Runnable, Serializable{
 
@@ -45,13 +46,14 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 	}
 
 	private void init(){
-		disp = new Display(width, height);
+		disp = new Display(width, height, this);
 		add(disp);
 		pack();
+
 	}
 
 	private void tick(){
-
+		GameStateManager.tick();
 	}
 
 	@Override
@@ -114,5 +116,9 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		}
 		System.exit(1);
 	}
-	
+
+	public Display getDisp(){
+		return disp;
+	}
+
 }
