@@ -114,13 +114,5 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		}
 		System.exit(1);
 	}
-
-	public int getWidth(){
-		return width;
-	}
-
-	public int getHeight(){
-		return height;
-	}
-
+	
 }

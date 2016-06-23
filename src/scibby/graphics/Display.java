@@ -40,12 +40,4 @@ public class Display extends Canvas implements Serializable{
 
 		bs.show();
 	}
-
-	public int getWidth(){
-		return width;
-	}
-
-	public int getHeight(){
-		return height;
-	}
 }
