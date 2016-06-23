@@ -12,15 +12,15 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 
 	private boolean running = false;
 
-	public int width;
+	private int width;
 
-	public int height;
+	private int height;
 
-	public int maxFrames;
+	private int maxFrames;
 
 	public String title;
 
-	Display disp;
+	private Display disp;
 
 	public GameContainer(int width, int height, int maxFrames){
 		this.width = width;
