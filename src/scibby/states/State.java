@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public abstract class State{
 	
-	private final int stateId;
+	protected final int stateId;
 	
 	public State(int stateId){
 		this.stateId = stateId;
