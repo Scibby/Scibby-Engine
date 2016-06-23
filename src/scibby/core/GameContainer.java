@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.swing.JFrame;
 
+import scibby.graphics.Display;
+
 public class GameContainer extends JFrame implements Runnable, Serializable{
 
 	private Thread thread;
@@ -17,6 +19,8 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 	public int maxFrames;
 
 	public String title;
+
+	Display disp;
 
 	public GameContainer(int width, int height, int maxFrames){
 		this.width = width;
@@ -41,7 +45,9 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 	}
 
 	private void init(){
-	
+		disp = new Display(width, height);
+		add(disp);
+		pack();
 	}
 
 	private void tick(){
@@ -67,7 +73,7 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 				if(delta >= 1){
 					tick();
 					updates++;
-					//render
+					disp.render();
 					frames++;
 					delta--;
 				}
@@ -82,7 +88,10 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		}
 
 	}
-	
+
+	/**
+	 * Starts the thread.
+	 */
 	public synchronized void start(){
 		if(running) return;
 
@@ -91,6 +100,9 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		thread.start();
 	}
 
+	/**
+	 * Stops the thread.
+	 */
 	public synchronized void stop(){
 		if(!running) return;
 
