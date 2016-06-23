@@ -2,28 +2,33 @@ package scibby.states;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GameStateManager{
 
-	private ArrayList<State> stateList = new ArrayList<State>();
+	private static LinkedList<State> stateList = new LinkedList<State>();
 
-	public State currentState;
-	
-	public void tick(){
+	public static State currentState;
+
+	public static void tick(){
 		for(int i = 0; i < stateList.size(); i++){
 			stateList.get(i).tick();
 		}
 	}
 
-	public void render(Graphics g){
-		currentState.render(g);
+	public static void render(Graphics g){
+		for(int i = 0; i < stateList.size(); i++){
+			if(stateList.get(i).equals(currentState)){
+				stateList.get(i).render(g);
+			}
+		}
 	}
 
-	public void addState(State state){
+	public static void addState(State state){
 		stateList.add(state);
 	}
 
-	public void removeState(State state){
+	public static void removeState(State state){
 		stateList.remove(state);
 	}
 
