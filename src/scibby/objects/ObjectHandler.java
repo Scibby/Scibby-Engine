@@ -21,15 +21,15 @@ public class ObjectHandler{
 		}
 	}
 
-	public static void addObjects(GameObject object){
+	public static void addObject(GameObject object){
 		objectList.add(object);
 	}
 
-	public static void removeObjects(GameObject object){
+	public static void removeObject(GameObject object){
 		objectList.remove(object);
 	}
 	
-	public static void clearObjects(){
+	public static void clearObject(){
 		objectList.clear();
 	}
 
