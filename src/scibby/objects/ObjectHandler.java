@@ -7,29 +7,29 @@ import scibby.states.State;
 
 public class ObjectHandler{
 
-	private ArrayList<GameObject> objectList = new ArrayList<GameObject>();
+	private static ArrayList<GameObject> objectList = new ArrayList<GameObject>();
 
-	public void tick(){
+	public static void tick(){
 		for(int i = 0; i < objectList.size(); i++){
 			objectList.get(i).tick();
 		}
 	}
 
-	public void render(Graphics g){
+	public static void render(Graphics g){
 		for(int i = 0; i < objectList.size(); i++){
 			objectList.get(i).render(g);
 		}
 	}
 
-	public void addObjects(GameObject object){
+	public static void addObjects(GameObject object){
 		objectList.add(object);
 	}
 
-	public void removeObjects(GameObject object){
+	public static void removeObjects(GameObject object){
 		objectList.remove(object);
 	}
 	
-	public void clearObjects(){
+	public static void clearObjects(){
 		objectList.clear();
 	}
 
