@@ -3,7 +3,6 @@ package scibby.core;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.Serializable;
 
 import javax.swing.JFrame;
 
@@ -52,7 +51,6 @@ public class GameContainer extends JFrame implements Runnable{
 		disp = new Display(width, height, this);
 		add(disp);
 		pack();
-
 	}
 
 	private void tick(){
