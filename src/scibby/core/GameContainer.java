@@ -1,5 +1,8 @@
 package scibby.core;
 
+import java.awt.event.KeyListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.Serializable;
 
 import javax.swing.JFrame;
@@ -7,7 +10,7 @@ import javax.swing.JFrame;
 import scibby.graphics.Display;
 import scibby.states.GameStateManager;
 
-public class GameContainer extends JFrame implements Runnable, Serializable{
+public class GameContainer extends JFrame implements Runnable{
 
 	private Thread thread;
 
@@ -45,7 +48,7 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		setVisible(true);
 	}
 
-	private void init(){
+	public void init(){
 		disp = new Display(width, height, this);
 		add(disp);
 		pack();
@@ -59,8 +62,6 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 	@Override
 	public void run(){
 		while(running){
-
-			init();
 
 			long initialNanoTime = System.nanoTime();
 			double ticksPerSecond = 1000000000 / maxFrames;
@@ -91,9 +92,6 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 
 	}
 
-	/**
-	 * Starts the thread.
-	 */
 	public synchronized void start(){
 		if(running) return;
 
@@ -102,9 +100,6 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 		thread.start();
 	}
 
-	/**
-	 * Stops the thread.
-	 */
 	public synchronized void stop(){
 		if(!running) return;
 
@@ -120,5 +115,4 @@ public class GameContainer extends JFrame implements Runnable, Serializable{
 	public Display getDisp(){
 		return disp;
 	}
-
 }
