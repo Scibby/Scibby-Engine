@@ -115,4 +115,22 @@ public class GameContainer extends JFrame implements Runnable{
 	public Display getDisp(){
 		return disp;
 	}
+	
+	public void addMouseClick(MouseListener ml){
+		if(disp != null){
+			disp.addMouseListener(ml);
+		}
+	}
+
+	public void addMouseMotion(MouseMotionListener ml){
+		if(disp != null){
+			disp.addMouseMotionListener(ml);
+		}
+	}
+
+	public void addKeyBoard(KeyListener kl){
+		if(disp != null){
+			disp.addKeyListener(kl);
+		}
+	}
 }
