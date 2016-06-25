@@ -3,8 +3,6 @@ package scibby.objects;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import scibby.states.State;
-
 public class ObjectHandler{
 
 	private static ArrayList<GameObject> objectList = new ArrayList<GameObject>();
