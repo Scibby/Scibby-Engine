@@ -62,11 +62,10 @@ public class ResourceLoader{
 			e.printStackTrace();
 		}
 
-		/* 
-		 * Used to print the map.
-		 * for(int[] nums : levelMap){
-		 * System.out.println(Arrays.toString(nums)); }
-		 */
+		// Used to print the map.
+		/*for(int[] nums : levelMap){
+			System.out.println(Arrays.toString(nums));
+		}*/
 
 		return levelMap;
 	}
