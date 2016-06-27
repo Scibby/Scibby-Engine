@@ -10,7 +10,7 @@ import java.io.Serializable;
 import scibby.core.GameContainer;
 import scibby.states.GameStateManager;
 
-public class Display extends Canvas implements Serializable{
+public class Display extends Canvas{
 
 	private int width;
 
