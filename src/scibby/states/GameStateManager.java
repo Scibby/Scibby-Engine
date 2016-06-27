@@ -1,7 +1,6 @@
 package scibby.states;
 
-import java.awt.Graphics;
-import java.util.ArrayList;
+import java.awt.Graphics2D;
 import java.util.LinkedList;
 
 public class GameStateManager{
@@ -16,7 +15,7 @@ public class GameStateManager{
 		}
 	}
 
-	public static void render(Graphics g){
+	public static void render(Graphics2D g){
 		for(int i = 0; i < stateList.size(); i++){
 			if(stateList.get(i).equals(currentState)){
 				stateList.get(i).render(g);

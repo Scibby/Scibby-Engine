@@ -1,6 +1,6 @@
 package scibby.objects;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public abstract class GameObject{
 
@@ -24,7 +24,7 @@ public abstract class GameObject{
 
 	public abstract void tick();
 
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics2D g);
 
 	public float getX(){
 		return x;

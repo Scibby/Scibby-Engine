@@ -1,6 +1,6 @@
 package scibby.objects;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class ObjectHandler{
@@ -13,7 +13,7 @@ public class ObjectHandler{
 		}
 	}
 
-	public static void render(Graphics g){
+	public static void render(Graphics2D g){
 		for(int i = 0; i < objectList.size(); i++){
 			objectList.get(i).render(g);
 		}
@@ -26,7 +26,7 @@ public class ObjectHandler{
 	public static void removeObject(GameObject object){
 		objectList.remove(object);
 	}
-	
+
 	public static void clearObject(){
 		objectList.clear();
 	}
