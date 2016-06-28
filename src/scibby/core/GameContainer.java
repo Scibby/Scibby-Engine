@@ -2,13 +2,12 @@ package scibby.core;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
 import scibby.graphics.Display;
-import scibby.input.MouseInput;
 import scibby.input.MouseMotion;
+import scibby.objects.ObjectHandler;
 import scibby.states.GameStateManager;
 
 public class GameContainer extends JFrame implements Runnable{
@@ -110,6 +109,9 @@ public class GameContainer extends JFrame implements Runnable{
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
+		
+		ObjectHandler.clearObject();
+		
 		System.exit(1);
 	}
 
