@@ -3,6 +3,8 @@ package scibby.states;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 
+import scibby.core.GameContainer;
+
 public class GameStateManager{
 
 	private static LinkedList<State> stateList = new LinkedList<State>();

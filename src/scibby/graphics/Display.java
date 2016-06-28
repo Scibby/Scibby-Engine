@@ -15,7 +15,7 @@ public class Display extends Canvas{
 	private int width;
 
 	private int height;
-	
+
 	private GameContainer gc;
 
 	public Display(final int width, final int height, GameContainer gc){
@@ -23,7 +23,7 @@ public class Display extends Canvas{
 		this.width = width;
 		this.height = height;
 		this.gc = gc;
-		
+
 		Dimension dim = new Dimension(width, height);
 		setMinimumSize(dim);
 		setPreferredSize(dim);
@@ -43,7 +43,7 @@ public class Display extends Canvas{
 		g.fillRect(0, 0, width, height);
 
 		GameStateManager.render(g);
-		
+
 		g.dispose();
 
 		bs.show();
