@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import scibby.input.MouseMotion;
+import scibby.util.AudioPlayer;
 
 public class Button extends Rectangle{
 
@@ -25,6 +26,8 @@ public class Button extends Rectangle{
 	protected final int oldY;
 	protected final int oldWidth;
 	protected final int oldHeight;
+	
+	protected AudioPlayer buttonSFX;
 
 	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, Font font){
 		super(x, y, width, height);
@@ -38,6 +41,21 @@ public class Button extends Rectangle{
 		this.oldWidth = width;
 		this.oldHeight = height;
 	}
+	
+	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, Font font, AudioPlayer audio){
+		super(x, y, width, height);
+		this.text = text;
+		this.color = color;
+		this.hColor = hColor;
+		this.font = font;
+
+		this.oldX = x;
+		this.oldY = y;
+		this.oldWidth = width;
+		this.oldHeight = height;
+		
+		this.buttonSFX = audio;
+	}
 
 	public void drawButton(Graphics2D g){
 
@@ -50,7 +68,10 @@ public class Button extends Rectangle{
 
 				x -= (width / 8);
 				y -= (height / 8);
-
+				
+				if(buttonSFX != null){
+					buttonSFX.play();
+				}
 			}
 			g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 34));
 			g.setStroke(new BasicStroke(6));
