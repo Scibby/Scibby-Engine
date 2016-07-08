@@ -7,7 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import scibby.input.MouseMotion;
+import scibby.input.Mouse;
 import scibby.util.AudioPlayer;
 
 public class Button extends Rectangle{
@@ -59,7 +59,7 @@ public class Button extends Rectangle{
 
 	public void drawButton(Graphics2D g){
 
-		if(MouseMotion.MOUSE.intersects(this)){
+		if(Mouse.MOUSE.intersects(this)){
 			g.setColor(hColor);
 
 			if(!hovered){
