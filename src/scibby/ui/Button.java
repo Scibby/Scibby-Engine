@@ -59,6 +59,8 @@ public class Button extends Rectangle{
 
 	public void drawButton(Graphics2D g){
 
+		g.setFont(font);
+		
 		if(Mouse.MOUSE.intersects(this)){
 			g.setColor(hColor);
 
