@@ -27,7 +27,7 @@ public class ObjectHandler{
 		objectList.remove(object);
 	}
 
-	public static void clearObject(){
+	public static void clearObjects(){
 		objectList.clear();
 	}
 

@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import scibby.graphics.Display;
-import scibby.input.MouseMotion;
+import scibby.input.Mouse;
 import scibby.objects.ObjectHandler;
 import scibby.states.GameStateManager;
 
@@ -52,7 +52,7 @@ public class GameContainer extends JFrame implements Runnable{
 		disp = new Display(width, height, this);
 		add(disp);
 		pack();
-		disp.addMouseMotionListener(new MouseMotion());
+		disp.addMouseMotionListener(new Mouse());
 	}
 
 	private void tick(){
@@ -109,9 +109,9 @@ public class GameContainer extends JFrame implements Runnable{
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
-		
-		ObjectHandler.clearObject();
-		
+
+		ObjectHandler.clearObjects();
+
 		System.exit(1);
 	}
 
@@ -119,13 +119,13 @@ public class GameContainer extends JFrame implements Runnable{
 		return disp;
 	}
 
-	public void addMouseClick(MouseListener ml){
+	public void addMouseListener(MouseListener ml){
 		if(disp != null){
 			disp.addMouseListener(ml);
 		}
 	}
 
-	public void addKeyBoard(KeyListener kl){
+	public void addKeyListener(KeyListener kl){
 		if(disp != null){
 			disp.addKeyListener(kl);
 		}
