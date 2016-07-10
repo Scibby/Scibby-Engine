@@ -34,6 +34,8 @@ public class GameContainer extends JFrame implements Runnable{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
+		
+		init();
 	}
 
 	public GameContainer(int width, int height, int maxFrames, String title){
@@ -46,9 +48,10 @@ public class GameContainer extends JFrame implements Runnable{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
+		init();
 	}
 
-	public void init(){
+	private void init(){
 		disp = new Display(width, height, this);
 		add(disp);
 		pack();
