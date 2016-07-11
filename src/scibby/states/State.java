@@ -16,7 +16,7 @@ public abstract class State{
 
 	public void render(Graphics2D g){}
 
-	public int getStateId(){
+	public int getID(){
 		return stateId;
 	}
 }

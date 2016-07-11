@@ -9,17 +9,19 @@ public class GameStateManager{
 
 	private static LinkedList<State> stateList = new LinkedList<State>();
 
-	public static State currentState;
+	public static int currentState;
 
 	public static void tick(){
 		for(int i = 0; i < stateList.size(); i++){
-			stateList.get(i).tick();
+			if(stateList.get(i).getID() == currentState){
+				stateList.get(i).tick();
+			}
 		}
 	}
 
 	public static void render(Graphics2D g){
 		for(int i = 0; i < stateList.size(); i++){
-			if(stateList.get(i).equals(currentState)){
+			if(stateList.get(i).getID() == currentState){
 				stateList.get(i).render(g);
 			}
 		}
