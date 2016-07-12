@@ -1,6 +1,7 @@
 package scibby.entities;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 public abstract class Entity{
 
@@ -9,7 +10,7 @@ public abstract class Entity{
 	protected float velX, velY;
 
 	protected float width, height;
-	
+
 	protected final int ID;
 
 	public Entity(float x, float y, float width, float height, final int id){
@@ -74,6 +75,26 @@ public abstract class Entity{
 
 	public int getID(){
 		return ID;
+	}
+
+	public Rectangle getBounds(){
+		return new Rectangle((int) x, (int) y, (int) width, (int) height);
+	}
+
+	public Rectangle getBoundsTop(){
+		return new Rectangle((int) x + 6, (int) y, (int) width - 12, 12);
+	}
+
+	public Rectangle getBoundsBottom(){
+		return new Rectangle((int) x + 6, (int) ((int) y + (height - 12)), (int) width - 12, 12);
+	}
+
+	public Rectangle getBoundsLeft(){
+		return new Rectangle((int) x, (int) y + 6, 6, (int) height - 12);
+	}
+
+	public Rectangle getBoundsRight(){
+		return new Rectangle((int) ((int) x + (width - 6)), (int) y + 6, 6, (int) height - 12);
 	}
 
 }
