@@ -2,7 +2,7 @@ package scibby.objects;
 
 import java.awt.Graphics2D;
 
-public abstract class GameObject{
+public abstract class Entity{
 
 	protected float x, y;
 
@@ -12,9 +12,7 @@ public abstract class GameObject{
 	
 	protected final int ID;
 
-	protected ObjectHandler handler;
-
-	public GameObject(float x, float y, float width, float height, final int id){
+	public Entity(float x, float y, float width, float height, final int id){
 		this.x = x;
 		this.y = y;
 		this.width = width;
