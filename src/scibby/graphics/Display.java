@@ -5,7 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.io.Serializable;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import scibby.core.GameContainer;
 import scibby.states.GameStateManager;
@@ -16,13 +17,10 @@ public class Display extends Canvas{
 
 	private int height;
 
-	private GameContainer gc;
-
 	public Display(final int width, final int height, GameContainer gc){
 
 		this.width = width;
 		this.height = height;
-		this.gc = gc;
 
 		Dimension dim = new Dimension(width, height);
 		setMinimumSize(dim);
@@ -38,7 +36,7 @@ public class Display extends Canvas{
 		}
 
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-
+		
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
 

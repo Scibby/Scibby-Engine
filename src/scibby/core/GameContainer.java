@@ -1,14 +1,11 @@
 package scibby.core;
 
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
 
 import scibby.graphics.Display;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
-import scibby.objects.ObjectHandler;
+import scibby.objects.EntityHandler;
 import scibby.states.GameStateManager;
 
 public class GameContainer extends JFrame implements Runnable{
@@ -49,6 +46,7 @@ public class GameContainer extends JFrame implements Runnable{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
+		
 		init();
 	}
 
@@ -90,11 +88,11 @@ public class GameContainer extends JFrame implements Runnable{
 
 				if(System.currentTimeMillis() - milli > 1000){
 					milli += 1000;
+					//System.out.println("Updates: " + updates + ", frames: " + frames);
 					updates = 0;
 					frames = 0;
 				}
 			}
-			System.out.println(updates + ", " + frames);
 		}
 
 	}
@@ -117,7 +115,7 @@ public class GameContainer extends JFrame implements Runnable{
 			e.printStackTrace();
 		}
 
-		ObjectHandler.clearObjects();
+		EntityHandler.clearObjects();
 
 		System.exit(1);
 	}
