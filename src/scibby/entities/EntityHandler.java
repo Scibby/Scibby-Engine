@@ -1,4 +1,4 @@
-package scibby.objects;
+package scibby.entities;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
