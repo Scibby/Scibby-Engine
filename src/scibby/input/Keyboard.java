@@ -21,6 +21,12 @@ public class Keyboard implements KeyListener{
 		return keys[key];
 	}
 	
+	public static void releaseKeys(){
+		for(boolean k : keys){
+			k = false;
+		}
+	}
+	
 	@Override
 	public void keyTyped(KeyEvent e){}
 
