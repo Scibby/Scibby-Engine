@@ -39,33 +39,30 @@ public class ResourceLoader{
 		return image;
 	}
 
-	public int[][] loadLevel(String levelName, int width, int height){
-		int[][] levelMap = new int[width][height];
+	public int[] loadLevel(String levelName, int width, int height){
+		int[] levelMap = new int[width * height];
 
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader(getClass().getResourceAsStream(LEVEL_LOCATION + levelName + LEVEL_ENDING)));
 
 		String rawLine = null;
-
-		int[] line;
-
+		
+		int j = 0;
 		try{
-			int i = 0;
 			while((rawLine = br.readLine()) != null){
+				
 				String[] nums = rawLine.split(",");
-				line = Arrays.stream(nums).mapToInt(Integer::parseInt).toArray();
-				levelMap[i] = line;
-				i++;
+				
+				for(int i = 0; i < width; i++){
+					levelMap[i + j * width] = Integer.parseInt(nums[i]);
+				}
+				
+				j++;
 			}
 			br.close();
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-
-		// Used to print the map.
-		/*for(int[] nums : levelMap){
-			System.out.println(Arrays.toString(nums));
-		}*/
 
 		return levelMap;
 	}
