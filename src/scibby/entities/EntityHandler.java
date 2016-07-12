@@ -5,30 +5,30 @@ import java.util.ArrayList;
 
 public class EntityHandler{
 
-	private static ArrayList<Entity> entitys = new ArrayList<Entity>();
+	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 
 	public static void tick(){
-		for(int i = 0; i < entitys.size(); i++){
-			entitys.get(i).tick();
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).tick();
 		}
 	}
 
 	public static void render(Graphics2D g){
-		for(int i = 0; i < entitys.size(); i++){
-			entitys.get(i).render(g);
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).render(g);
 		}
 	}
 
 	public static void addEntity(Entity entity){
-		entitys.add(entity);
+		entities.add(entity);
 	}
 
 	public static void removeEntity(Entity entity){
-		entitys.remove(entity);
+		entities.remove(entity);
 	}
 
 	public static void clearObjects(){
-		entitys.clear();
+		entities.clear();
 	}
 
 }
