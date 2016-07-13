@@ -18,6 +18,8 @@ public class Button extends Rectangle{
 
 	protected Color hColor;
 
+	protected boolean shouldHover;
+
 	protected Font font;
 
 	protected boolean hovered = false;
@@ -26,14 +28,15 @@ public class Button extends Rectangle{
 	protected final int oldY;
 	protected final int oldWidth;
 	protected final int oldHeight;
-	
+
 	protected AudioPlayer buttonSFX;
 
-	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, Font font){
+	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, boolean shouldHover, Font font){
 		super(x, y, width, height);
 		this.text = text;
 		this.color = color;
 		this.hColor = hColor;
+		this.shouldHover = shouldHover;
 		this.font = font;
 
 		this.oldX = x;
@@ -41,57 +44,63 @@ public class Button extends Rectangle{
 		this.oldWidth = width;
 		this.oldHeight = height;
 	}
-	
-	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, Font font, AudioPlayer audio){
+
+	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, boolean shouldHover, Font font,
+			AudioPlayer audio){
 		super(x, y, width, height);
 		this.text = text;
 		this.color = color;
 		this.hColor = hColor;
+		this.shouldHover = shouldHover;
 		this.font = font;
 
 		this.oldX = x;
 		this.oldY = y;
 		this.oldWidth = width;
 		this.oldHeight = height;
-		
+
 		this.buttonSFX = audio;
 	}
 
 	public void drawButton(Graphics2D g){
 
 		g.setFont(font);
-		
+
 		if(Mouse.MOUSE.intersects(this)){
 			g.setColor(hColor);
 
 			if(!hovered){
-				width += (width / 4);
-				height += (height / 4);
+				if(shouldHover){
+					width += (width / 4);
+					height += (height / 4);
 
-				x -= (width / 8);
-				y -= (height / 8);
-				
+					x -= (width / 8);
+					y -= (height / 8);
+				}
 				if(buttonSFX != null){
 					buttonSFX.play();
 				}
 			}
-			g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 34));
-			g.setStroke(new BasicStroke(6));
+			if(shouldHover){
+				g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 34));
+				g.setStroke(new BasicStroke(6));
+			}
 			hovered = true;
 		}else{
 			g.setColor(color);
 
 			if(hovered){
-				width = oldWidth;
-				height = oldHeight;
+				if(shouldHover){
+					width = oldWidth;
+					height = oldHeight;
 
-				x = oldX;
-				y = oldY;
-
+					x = oldX;
+					y = oldY;
+				}
 			}
 			g.setStroke(new BasicStroke(3));
-
 			g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 28));
+			
 			hovered = false;
 		}
 
