@@ -2,10 +2,10 @@ package scibby.core;
 
 import javax.swing.JFrame;
 
+import scibby.entities.EntityHandler;
 import scibby.graphics.Display;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
-import scibby.objects.EntityHandler;
 import scibby.states.GameStateManager;
 
 public class GameContainer extends JFrame implements Runnable{

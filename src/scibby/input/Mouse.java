@@ -20,13 +20,18 @@ public class Mouse implements MouseInputListener{
 	public void mouseReleased(MouseEvent e){
 		buttons[e.getButton()] = false;
 	}
-	
+
 	public static boolean isButtonPressed(int button){
 		return buttons[button];
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e){
+		MOUSE.setLocation(e.getX(), e.getY());
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e){
 		MOUSE.setLocation(e.getX(), e.getY());
 	}
 
@@ -39,6 +44,4 @@ public class Mouse implements MouseInputListener{
 	@Override
 	public void mouseExited(MouseEvent e){}
 
-	@Override
-	public void mouseDragged(MouseEvent e){}
 }
