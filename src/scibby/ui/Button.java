@@ -21,6 +21,8 @@ public class Button extends Rectangle{
 	protected boolean shouldHover;
 
 	protected Font font;
+	protected int fontSize;
+	protected int hoverFontSize;
 
 	protected boolean hovered = false;
 
@@ -38,11 +40,14 @@ public class Button extends Rectangle{
 		this.hColor = hColor;
 		this.shouldHover = shouldHover;
 		this.font = font;
+		this.fontSize = font.getSize();
 
 		this.oldX = x;
 		this.oldY = y;
 		this.oldWidth = width;
 		this.oldHeight = height;
+
+		this.hoverFontSize = fontSize + (fontSize / 4);
 	}
 
 	public Button(int x, int y, int width, int height, String text, Color color, Color hColor, boolean shouldHover, Font font,
@@ -53,12 +58,15 @@ public class Button extends Rectangle{
 		this.hColor = hColor;
 		this.shouldHover = shouldHover;
 		this.font = font;
+		this.fontSize = font.getSize();
 
 		this.oldX = x;
 		this.oldY = y;
 		this.oldWidth = width;
 		this.oldHeight = height;
 
+		this.hoverFontSize = fontSize + (fontSize / 4);
+		
 		this.buttonSFX = audio;
 	}
 
@@ -82,7 +90,7 @@ public class Button extends Rectangle{
 				}
 			}
 			if(shouldHover){
-				g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 34));
+				g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, hoverFontSize));
 				g.setStroke(new BasicStroke(6));
 			}
 			hovered = true;
@@ -99,8 +107,8 @@ public class Button extends Rectangle{
 				}
 			}
 			g.setStroke(new BasicStroke(3));
-			g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, 28));
-			
+			g.setFont(new Font(g.getFont().getFontName(), Font.PLAIN, fontSize));
+
 			hovered = false;
 		}
 
