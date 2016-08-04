@@ -30,6 +30,9 @@ public class ResourceLoader{
 	public final static String AUDIO_ENDING = ".wav";
 
 	public BufferedImage loadImage(String imageName){
+		
+		if(imageName == null) return null;
+		
 		BufferedImage image = null;
 		try{
 			image = ImageIO.read(getClass().getResource(IMAGE_LOCATION + imageName + IMAGE_ENDING));
@@ -40,6 +43,9 @@ public class ResourceLoader{
 	}
 
 	public int[] loadLevel(String levelName, int width, int height){
+
+		if(levelName == null) return null;
+		
 		int[] levelMap = new int[width * height];
 
 		BufferedReader br = new BufferedReader(
@@ -68,6 +74,9 @@ public class ResourceLoader{
 	}
 
 	public AudioInputStream loadAudio(String audioName){
+		
+		if(audioName != null) return null;
+		
 		AudioInputStream ais = null;
 		try{
 			ais = AudioSystem.getAudioInputStream(getClass().getResource(AUDIO_LOCATION + audioName + AUDIO_ENDING));
