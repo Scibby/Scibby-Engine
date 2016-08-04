@@ -2,10 +2,10 @@ package scibby.core;
 
 import javax.swing.JFrame;
 
-import scibby.entities.EntityHandler;
 import scibby.graphics.Display;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
+import scibby.level.Level;
 import scibby.states.GameStateManager;
 
 public class GameContainer extends JFrame implements Runnable{
@@ -62,6 +62,7 @@ public class GameContainer extends JFrame implements Runnable{
 
 	private void tick(){
 		GameStateManager.tick();
+		Level.tick();
 	}
 
 	@Override
@@ -78,17 +79,17 @@ public class GameContainer extends JFrame implements Runnable{
 				long now = System.nanoTime();
 				delta += (now - initialNanoTime) / ticksPerSecond;
 				initialNanoTime = now;
+				disp.render();
+				frames++;
 				if(delta >= 1){
 					tick();
 					updates++;
-					disp.render();
-					frames++;
 					delta--;
 				}
 
 				if(System.currentTimeMillis() - milli > 1000){
 					milli += 1000;
-					//System.out.println("Updates: " + updates + ", frames: " + frames);
+					System.out.println("Updates: " + updates + ", frames: " + frames);
 					updates = 0;
 					frames = 0;
 				}
@@ -114,8 +115,6 @@ public class GameContainer extends JFrame implements Runnable{
 		}catch(InterruptedException e){
 			e.printStackTrace();
 		}
-
-		EntityHandler.clearObjects();
 
 		System.exit(1);
 	}

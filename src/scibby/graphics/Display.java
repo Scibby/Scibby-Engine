@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 import scibby.core.GameContainer;
+import scibby.level.Level;
 import scibby.states.GameStateManager;
 
 public class Display extends Canvas{
@@ -41,7 +42,8 @@ public class Display extends Canvas{
 		g.fillRect(0, 0, width, height);
 
 		GameStateManager.render(g);
-
+		Level.render(g);
+		
 		g.dispose();
 
 		bs.show();
