@@ -6,8 +6,9 @@ import java.awt.GraphicsEnvironment;
 public class Fonts{
 
 	private String fileLocation;
-	
+
 	public Fonts(String fileName){
+		if(fileName == null) throw new IllegalArgumentException("argument cannot be null!");
 		this.fileLocation = ResourceLoader.FONT_LOCATION + fileName + ResourceLoader.FONT_ENDING;
 		registerFont();
 	}

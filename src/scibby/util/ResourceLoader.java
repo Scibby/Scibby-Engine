@@ -31,7 +31,7 @@ public class ResourceLoader{
 
 	public BufferedImage loadImage(String imageName){
 		
-		if(imageName == null) return null;
+		if(imageName == null) throw new IllegalArgumentException("argument cannot be null!");
 		
 		BufferedImage image = null;
 		try{
@@ -44,7 +44,7 @@ public class ResourceLoader{
 
 	public int[] loadLevel(String levelName, int width, int height){
 
-		if(levelName == null) return null;
+		if(levelName == null) throw new IllegalArgumentException("argument cannot be null!");
 		
 		int[] levelMap = new int[width * height];
 
@@ -75,7 +75,7 @@ public class ResourceLoader{
 
 	public AudioInputStream loadAudio(String audioName){
 		
-		if(audioName != null) return null;
+		if(audioName == null) throw new IllegalArgumentException("argument cannot be null!");;
 		
 		AudioInputStream ais = null;
 		try{
