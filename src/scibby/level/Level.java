@@ -42,9 +42,7 @@ public abstract class Level{
 	}
 
 	public static Tile getTile(int x, int y){
-		Tile tile = level.tiles.get(x + y * level.WIDTH);
-		if(tile != null) return tile;
-		return tile;
+		return level.tiles.get(x + y * level.WIDTH);
 	}
 
 	public static void add(Entity entity){
