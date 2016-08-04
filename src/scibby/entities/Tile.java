@@ -10,8 +10,8 @@ public abstract class Tile extends Entity{
 
 	private BufferedImage image;
 
-	public Tile(float x, float y, float width, float height, int id, BufferedImage image){
-		super(x, y, width, height, id);
+	public Tile(int x, int y, int width, int height, BufferedImage image){
+		super(x, y, width, height);
 		this.image = image;
 	}
 
