@@ -17,8 +17,8 @@ public abstract class Projectile extends Entity{
 	private int range;
 	private BufferedImage image;
 
-	public Projectile(float x, float y, float width, float height, int id, double angle,int range, Entity player, BufferedImage image){
-		super(x, y, width, height, id);
+	public Projectile(int x, int y, int width, int height, double angle,int range, Entity player, BufferedImage image){
+		super(x, y, width, height);
 		xOrigin = (int) x;
 		yOrigin = (int) y;
 		this.player = player;
