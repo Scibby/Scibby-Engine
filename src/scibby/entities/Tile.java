@@ -1,10 +1,7 @@
 package scibby.entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
-import scibby.entities.Entity;
 
 public abstract class Tile extends Entity{
 
@@ -15,19 +12,18 @@ public abstract class Tile extends Entity{
 		this.image = image;
 	}
 
+	public Tile(int x, int y, int width, int height){
+		super(x, y, width, height);
+	}
+	
 	@Override
 	public abstract void tick();
 
 	@Override
 	public void render(Graphics2D g){
-
 		if(image != null){
 			g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
-		}else{
-			g.setColor(Color.WHITE);
-			g.fillRect((int) x, (int) y, (int) width, (int) height);
 		}
-
 	}
 
 	public boolean isSolid(){
