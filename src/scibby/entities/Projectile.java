@@ -5,59 +5,77 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 import scibby.level.Level;
-import scibby.util.ResourceLoader;
 
 public abstract class Projectile extends Entity{
 
 	private int xOrigin, yOrigin;
 	private int speed = 10;
-	private Entity player;
+	private Mob shooter;
 	private double nx, ny;
 	private double angle;
 	private int range;
 	private BufferedImage image;
+	public boolean removed = false;
 
-	public Projectile(int x, int y, int width, int height, double angle,int range, Entity player, BufferedImage image){
+	public Projectile(double x, double y, int width, int height, double angle, int range, Mob shooter, BufferedImage image){
 		super(x, y, width, height);
 		xOrigin = (int) x;
 		yOrigin = (int) y;
-		this.player = player;
+		this.shooter = shooter;
 		this.angle = angle;
 		this.range = range;
 		this.image = image;
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
-		Level.add(this);
+		shooter.projectiles.add(this);
 	}
 
 	@Override
 	public void tick(){
-
-		x += nx;
-		y += ny;
-
-		collision();
+		if(isColliding(nx, ny)){
+			remove();
+		}
+		
+		move(nx, ny);
 
 		if(Math.abs(x - xOrigin) > range){
-			Level.remove(this);
+			remove();
 		}
 
 		if(Math.abs(y - yOrigin) > range){
-			Level.remove(this);
+			remove();
 		}
 	}
 
-	protected abstract void collision();
+	protected void move(double xa, double ya){
+		x += xa;
+		y += ya;
+	}
+
+	protected boolean isColliding(double xa, double ya){
+		for(int c = 0; c < 4; c++){
+			double xt = ((x + xa) - c % 2) / 32;
+			double yt = ((y + ya) - c / 2) / 32;
+			int ix = (int) Math.ceil(xt);
+			int iy = (int) Math.ceil(yt);
+			if(c % 2 == 0) ix = (int) Math.floor(xt);
+			if(c / 2 == 0) iy = (int) Math.floor(yt);
+			Tile tile = Level.getTile(ix, iy);
+			if(tile != null) return tile.isSolid();
+		}
+		return false;
+	}
 
 	@Override
 	public void render(Graphics2D g){
 		if(image != null){
 			g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
-		}else{
-			g.setColor(Color.GREEN.darker());
-			g.fillRect((int) x, (int) y, (int) width, (int) height);
 		}
+	}
+
+	protected void remove(){
+		removed = true;
 	}
 
 }
