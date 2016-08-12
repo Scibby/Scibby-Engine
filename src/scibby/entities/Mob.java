@@ -55,8 +55,10 @@ public abstract class Mob extends Entity{
 	protected boolean isColliding(double xa, double ya){
 		boolean solid = false;
 		for(int c = 0; c < 4; c++){
-			double xt = ((x + xa) - c % 2) / 32;
-			double yt = ((y + ya) - c / 2) / 32;
+			int xq = xa > 0 ? 1 : 0;
+			int yq = ya > 0 ? 1 : 0;
+			double xt = ((x + xa) - c % 2 + xq) / 32;
+			double yt = ((y + ya) - c / 2 + yq) / 32;
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
 			if(c % 2 == 0) ix = (int) Math.floor(xt);
