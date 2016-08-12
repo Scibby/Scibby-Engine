@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import scibby.entities.Entity;
+import scibby.entities.Mob;
+import scibby.entities.Projectile;
 import scibby.entities.Tile;
 
 public abstract class Level{
@@ -31,13 +33,32 @@ public abstract class Level{
 		if(currentLevel == 0) return;
 		for(Entity e : level.entities){
 			e.tick();
+			if(e instanceof Mob){
+				for(int i = 0; i < ((Mob) e).projectiles.size(); i++){
+					if(((Mob) e).projectiles.get(i).removed){
+						((Mob) e).projectiles.remove(((Mob) e).projectiles.get(i));
+					}
+				}
+			}
 		}
 	}
 
 	public static void render(Graphics2D g){
 		if(currentLevel == 0) return;
+		
+		for(int y = 0; y < level.HEIGHT; y++){
+			for(int x = 0; x < level.WIDTH; x++){
+				getTile(x, y).render(g);
+			}
+		}
+		
 		for(Entity e : level.entities){
 			e.render(g);
+			if(e instanceof Mob){
+				for(Projectile p : ((Mob) e).projectiles){
+					p.render(g);
+				}
+			}
 		}
 	}
 
@@ -45,7 +66,7 @@ public abstract class Level{
 		return level.tiles.get(x + y * level.WIDTH);
 	}
 
-	public static void add(Entity entity){
+	public static void addEntity(Entity entity){
 		if(currentLevel == 0) return;
 		level.entities.add(entity);
 	}
