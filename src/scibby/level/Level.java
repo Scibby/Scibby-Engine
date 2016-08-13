@@ -71,7 +71,7 @@ public abstract class Level{
 		level.entities.add(entity);
 	}
 
-	public static void remove(Entity entity){
+	public static void removeEntity(Entity entity){
 		if(currentLevel == 0) return;
 		level.entities.remove(entity);
 	}
