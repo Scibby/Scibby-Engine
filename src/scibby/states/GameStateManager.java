@@ -11,6 +11,8 @@ public class GameStateManager{
 
 	public static int currentState;
 
+	private GameStateManager(){}
+	
 	public static void tick(){
 		for(int i = 0; i < stateList.size(); i++){
 			if(stateList.get(i).getID() == currentState){
