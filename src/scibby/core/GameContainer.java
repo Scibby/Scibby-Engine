@@ -24,18 +24,6 @@ public class GameContainer extends JFrame implements Runnable{
 
 	private Display disp;
 
-	public GameContainer(int width, int height, int maxFrames){
-		this.width = width;
-		this.height = height;
-		this.maxFrames = maxFrames;
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
-		setVisible(true);
-
-		init();
-	}
-
 	public GameContainer(int width, int height, int maxFrames, String title){
 		this.width = width;
 		this.height = height;
