@@ -13,7 +13,7 @@ public class SpriteSheet{
 	}
 
 	public BufferedImage getImage(int x, int y, int width, int height){
-		return image.getSubimage((x * width) - width, (y * height) - height, width, height);
+		return image.getSubimage((x * width), (y * height), width, height);
 	}
 
 }
