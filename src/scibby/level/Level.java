@@ -18,15 +18,15 @@ public abstract class Level{
 	private static Level level;
 
 	protected final int WIDTH, HEIGHT;
-	
+
 	protected final int TILE_SIZE;
 
-	public static ArrayList<Level> levels = new ArrayList<Level>();
+	private static ArrayList<Level> levels = new ArrayList<Level>();
 
 	protected LinkedList<Entity> entities = new LinkedList<Entity>();
 
 	protected HashMap<Integer, Tile> tiles = new HashMap<Integer, Tile>();
-	
+
 	protected Camera camera;
 
 	public Level(int width, int height, int viewSizeX, int viewSizeY, int tileSize){
@@ -53,15 +53,15 @@ public abstract class Level{
 
 	public static void render(Graphics2D g){
 		if(currentLevel == 0) return;
-		
+
 		g.translate(-level.camera.camX, -level.camera.camY);
-		
+
 		for(int y = 0; y < level.HEIGHT; y++){
 			for(int x = 0; x < level.WIDTH; x++){
 				getTile(x, y).render(g);
 			}
 		}
-		
+
 		for(Entity e : level.entities){
 			e.render(g);
 			if(e instanceof Mob){
@@ -86,13 +86,29 @@ public abstract class Level{
 		if(currentLevel == 0) return;
 		level.entities.remove(entity);
 	}
+	
+	public static void addLevel(Level level){
+		levels.add(level);
+	}
 
 	public static void setLevel(int levelNumber){
 		currentLevel = levelNumber;
 		level = levels.get(levelNumber - 1);
 	}
 
-	public abstract int getHEIGHT();
+	public static Level getCurrentLevel(){
+		return level;
+	}
+	
+	public int getTileSize(){
+		return TILE_SIZE;
+	}
+	
+	public int getHeight(){
+		return HEIGHT;
+	}
 
-	public abstract int getWIDTH();
+	public int getWidth(){
+		return WIDTH;
+	}
 }

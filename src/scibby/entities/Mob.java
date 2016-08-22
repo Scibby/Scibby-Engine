@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import scibby.core.GameMain;
 import scibby.level.Level;
 
 public abstract class Mob extends Entity{
@@ -56,8 +57,8 @@ public abstract class Mob extends Entity{
 		for(int c = 0; c < 4; c++){
 			int xq = xa > 0 ? 1 : 0;
 			int yq = ya > 0 ? 1 : 0;
-			double xt = ((x + xa) - c % 2 + xq) / 32;
-			double yt = ((y + ya) - c / 2 + yq) / 32;
+			double xt = ((x + xa) - c % 2 + xq) / Level.getCurrentLevel().getTileSize();
+			double yt = ((y + ya) - c / 2 + yq) / Level.getCurrentLevel().getTileSize();
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
 			if(c % 2 == 0) ix = (int) Math.floor(xt);
