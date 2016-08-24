@@ -9,9 +9,11 @@ import scibby.entities.Entity;
 import scibby.entities.Mob;
 import scibby.entities.Projectile;
 import scibby.entities.Tile;
+import scibby.events.Event;
 import scibby.graphics.Camera;
+import scibby.layer.Layer;
 
-public abstract class Level{
+public abstract class Level extends Layer{
 
 	private static int currentLevel;
 
@@ -23,8 +25,10 @@ public abstract class Level{
 
 	private static ArrayList<Level> levels = new ArrayList<Level>();
 
-	protected LinkedList<Entity> entities = new LinkedList<Entity>();
+	protected ArrayList<Entity> entities = new ArrayList<Entity>();
 
+	protected ArrayList<Entity> players = new ArrayList<Entity>();
+	
 	protected HashMap<Integer, Tile> tiles = new HashMap<Integer, Tile>();
 
 	protected Camera camera;
@@ -36,9 +40,8 @@ public abstract class Level{
 		camera = new Camera(viewSizeX, viewSizeY, width * tileSize, height * tileSize);
 	}
 
-	public static void tick(){
-		if(currentLevel == 0) return;
-		for(Entity e : level.entities){
+	public void tick(){
+		for(Entity e : entities){
 			e.tick();
 			if(e instanceof Mob){
 				for(int i = 0; i < ((Mob) e).projectiles.size(); i++){
@@ -51,10 +54,9 @@ public abstract class Level{
 		}
 	}
 
-	public static void render(Graphics2D g){
-		if(currentLevel == 0) return;
+	public void render(Graphics2D g){
 
-		g.translate(-level.camera.camX, -level.camera.camY);
+		g.translate(-camera.camX, -camera.camY);
 
 		for(int y = 0; y < level.HEIGHT; y++){
 			for(int x = 0; x < level.WIDTH; x++){
@@ -62,7 +64,7 @@ public abstract class Level{
 			}
 		}
 
-		for(Entity e : level.entities){
+		for(Entity e : entities){
 			e.render(g);
 			if(e instanceof Mob){
 				for(Projectile p : ((Mob) e).projectiles){
@@ -70,21 +72,24 @@ public abstract class Level{
 				}
 			}
 		}
-		g.translate(level.camera.camX, level.camera.camY);
+		g.translate(camera.camX, camera.camY);
+	}
+	
+	@Override
+	public abstract void onEvent(Event event);
+
+	public Tile getTile(int x, int y){
+		return tiles.get(x + y * level.WIDTH);
 	}
 
-	public static Tile getTile(int x, int y){
-		return level.tiles.get(x + y * level.WIDTH);
-	}
-
-	public static void addEntity(Entity entity){
+	public void addEntity(Entity entity){
 		if(currentLevel == 0) return;
-		level.entities.add(entity);
+		entities.add(entity);
 	}
 
-	public static void removeEntity(Entity entity){
+	public void removeEntity(Entity entity){
 		if(currentLevel == 0) return;
-		level.entities.remove(entity);
+		entities.remove(entity);
 	}
 	
 	public static void addLevel(Level level){
@@ -98,6 +103,10 @@ public abstract class Level{
 
 	public static Level getCurrentLevel(){
 		return level;
+	}
+	
+	public Camera getCamera(){
+		return camera;
 	}
 	
 	public int getTileSize(){

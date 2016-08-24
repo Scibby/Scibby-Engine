@@ -1,14 +1,19 @@
 package scibby.core;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
+import scibby.events.Event;
+import scibby.events.EventListener;
 import scibby.graphics.Display;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
+import scibby.layer.Layer;
 import scibby.level.Level;
 import scibby.states.GameStateManager;
 
-public class GameContainer extends JFrame implements Runnable{
+public class GameContainer extends JFrame implements Runnable, EventListener{
 
 	private Thread thread;
 
@@ -20,15 +25,15 @@ public class GameContainer extends JFrame implements Runnable{
 
 	private int maxFrames;
 
-	public String title;
+	private final String TITLE;
 
 	private Display disp;
-
+	
 	public GameContainer(int width, int height, int maxFrames, String title){
 		this.width = width;
 		this.height = height;
 		this.maxFrames = maxFrames;
-		this.title = title;
+		this.TITLE = title;
 
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,15 +47,18 @@ public class GameContainer extends JFrame implements Runnable{
 		disp = new Display(width, height, this);
 		add(disp);
 		pack();
-		Mouse mouse = new Mouse();
+		Mouse mouse = new Mouse(this);
 		disp.addMouseListener(mouse);
 		disp.addMouseMotionListener(mouse);
 		disp.addKeyListener(new Keyboard());
 	}
-
+	
+	public void onEvent(Event event){
+		GameStateManager.getCurrentState().onEvent(event);
+	}
+	
 	private void tick(){
-		GameStateManager.tick();
-		Level.tick();
+		GameStateManager.getCurrentState().tick();
 	}
 
 	@Override
@@ -77,7 +85,7 @@ public class GameContainer extends JFrame implements Runnable{
 
 				if(System.currentTimeMillis() - milli > 1000){
 					milli += 1000;
-					System.out.println("Updates: " + updates + ", frames: " + frames);
+					//System.out.println("Updates: " + updates + ", frames: " + frames);
 					updates = 0;
 					frames = 0;
 				}
@@ -109,5 +117,9 @@ public class GameContainer extends JFrame implements Runnable{
 
 	public Display getDisp(){
 		return disp;
+	}
+	
+	public String getTitle(){
+		return TITLE;
 	}
 }

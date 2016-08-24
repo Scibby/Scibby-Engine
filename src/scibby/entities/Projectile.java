@@ -1,11 +1,8 @@
 package scibby.entities;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.nio.charset.MalformedInputException;
 
-import scibby.core.GameMain;
 import scibby.level.Level;
 
 public abstract class Projectile extends Entity{
@@ -38,16 +35,16 @@ public abstract class Projectile extends Entity{
 		if(isColliding(nx, ny)){
 			remove();
 		}
-		
+
 		move(nx, ny);
+		if(outOfRange()) remove();
+	}
 
-		if(Math.abs(x - xOrigin) > range){
-			remove();
-		}
-
-		if(Math.abs(y - yOrigin) > range){
-			remove();
-		}
+	protected boolean outOfRange(){
+		double dist;
+		dist = Math.sqrt(Math.abs((x - xOrigin) * (y - yOrigin) + (y - yOrigin) * (y - yOrigin)));
+		if(dist > range) return true;
+		return false;
 	}
 
 	protected void move(double xa, double ya){
@@ -63,7 +60,7 @@ public abstract class Projectile extends Entity{
 			int iy = (int) Math.ceil(yt);
 			if(c % 2 == 0) ix = (int) Math.floor(xt);
 			if(c / 2 == 0) iy = (int) Math.floor(yt);
-			Tile tile = Level.getTile(ix, iy);
+			Tile tile = Level.getCurrentLevel().getTile(ix, iy);
 			if(tile != null) return tile.isSolid();
 		}
 		return false;

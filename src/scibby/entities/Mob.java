@@ -9,22 +9,6 @@ import scibby.level.Level;
 
 public abstract class Mob extends Entity{
 
-	protected enum Direction{
-		Up(0), Down(2), Left(3), Right(1);
-
-		private int num;
-
-		private Direction(int num){
-			this.num = num;
-		}
-
-		protected int getNum(){
-			return num;
-		}
-	}
-
-	protected Direction dir;
-
 	protected BufferedImage image;
 
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -63,7 +47,7 @@ public abstract class Mob extends Entity{
 			int iy = (int) Math.ceil(yt);
 			if(c % 2 == 0) ix = (int) Math.floor(xt);
 			if(c / 2 == 0) iy = (int) Math.floor(yt);
-			Tile tile = Level.getTile(ix, iy);
+			Tile tile = Level.getCurrentLevel().getTile(ix, iy);
 			if(tile != null){
 				if(tile.isSolid()){
 					solid = true;
@@ -80,11 +64,6 @@ public abstract class Mob extends Entity{
 			move(0, ya);
 			return;
 		}
-
-		if(xa > 0) dir = Direction.Right;
-		if(xa < 0) dir = Direction.Left;
-		if(ya > 0) dir = Direction.Down;
-		if(ya < 0) dir = Direction.Up;
 
 		while(xa != 0){
 			if(Math.abs(xa) > 1){

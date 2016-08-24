@@ -37,4 +37,9 @@ public class GameStateManager{
 		stateList.remove(state);
 	}
 
+	public static State getCurrentState(){
+		if(stateList.isEmpty()) return null;
+		return stateList.get(currentState);
+	}
+	
 }

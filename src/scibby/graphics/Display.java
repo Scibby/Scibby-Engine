@@ -5,11 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
 
 import scibby.core.GameContainer;
-import scibby.level.Level;
+import scibby.layer.Layer;
 import scibby.states.GameStateManager;
 
 public class Display extends Canvas{
@@ -41,8 +40,7 @@ public class Display extends Canvas{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
 
-		GameStateManager.render(g);
-		Level.render(g);
+		GameStateManager.getCurrentState().render(g);
 		
 		g.dispose();
 
