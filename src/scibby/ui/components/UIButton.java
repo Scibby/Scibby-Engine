@@ -29,7 +29,6 @@ public class UIButton extends UIComponent{
 	
 	public UIButton(Vector2i position, int width, int height, UIPanel parent, UIActionListener actionListener){
 		super(position, width, height, parent);
-		System.out.println(parent);
 		this.actionListener = actionListener;
 		label = new UILabel(new Vector2i(position), width, height, parent, "Button", new Font("Arial", Font.PLAIN, 26), this);
 		parent.addComponent(label);

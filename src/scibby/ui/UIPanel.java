@@ -1,6 +1,5 @@
 package scibby.ui;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -41,8 +40,6 @@ public class UIPanel{
 	}
 	
 	public void render(Graphics2D g){
-		g.setColor(new Color(0x333333));
-		//g.fillRect(position.getX(), position.getY(), width, height);
 		for(UIComponent component : components){
 			component.render(g);
 		}
