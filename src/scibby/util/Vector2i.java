@@ -23,6 +23,12 @@ public class Vector2i{
 		this.y += vector.y;
 		return this;
 	}
+	
+	public Vector2i add(int addition){
+		this.x += addition;
+		this.y += addition;
+		return this;
+	}
 
 	public Vector2i subtract(Vector2i vector){
 		this.x -= vector.x;
