@@ -65,7 +65,7 @@ public abstract class Level extends Layer{
 
 			p.tick();
 			if(p.isRemoved()){
-				particles.remove(i);
+				particles.remove(p);
 			}
 		}
 	}
@@ -91,7 +91,6 @@ public abstract class Level extends Layer{
 			}
 		}
 
-		System.out.println(particles.size());
 		for(int i = 0; i < particles.size(); i++){
 			Particle p = particles.get(i);
 			p.render(g);

@@ -7,13 +7,13 @@ import scibby.level.Level;
 
 public abstract class Projectile extends Entity{
 
-	private int xOrigin, yOrigin;
-	private int speed = 10;
-	private Mob shooter;
-	private double nx, ny;
-	private double angle;
-	private int range;
-	private BufferedImage image;
+	protected int xOrigin, yOrigin;
+	protected int speed = 10;
+	protected Mob shooter;
+	protected double nx, ny;
+	protected double angle;
+	protected int range;
+	protected BufferedImage image;
 
 	public Projectile(double x, double y, int width, int height, double angle, int range, Mob shooter, BufferedImage image){
 		super(x, y, width, height);
