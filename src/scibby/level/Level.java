@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import scibby.entities.Entity;
 import scibby.entities.Mob;
+import scibby.entities.Particle;
 import scibby.entities.Projectile;
 import scibby.entities.Tile;
 import scibby.events.Event;
@@ -26,7 +27,9 @@ public abstract class Level extends Layer{
 
 	protected ArrayList<Entity> entities = new ArrayList<Entity>();
 
-	protected ArrayList<Mob> players = new ArrayList<Mob>();
+	protected ArrayList<Particle> particles = new ArrayList<Particle>();
+
+	protected ArrayList<Mob> mobs = new ArrayList<Mob>();
 
 	protected HashMap<Integer, Tile> tiles = new HashMap<Integer, Tile>();
 
@@ -42,16 +45,9 @@ public abstract class Level extends Layer{
 	public void tick(){
 		for(Entity e : entities){
 			e.tick();
-			if(e instanceof Mob){
-				for(int i = 0; i < ((Mob) e).projectiles.size(); i++){
-					if(((Mob) e).projectiles.get(i).removed){
-						((Mob) e).projectiles.remove(((Mob) e).projectiles.get(i));
-					}
-				}
-				level.camera.tick((Mob) e);
-			}
 		}
-		for(Mob e : players){
+		
+		for(Mob e : mobs){
 			e.tick();
 			for(int i = 0; i < e.projectiles.size(); i++){
 				if(e.projectiles.get(i).removed){
@@ -59,6 +55,10 @@ public abstract class Level extends Layer{
 				}
 			}
 			level.camera.tick(e);
+		}
+		
+		for(Particle p : particles){
+			p.tick();
 		}
 	}
 
@@ -68,25 +68,24 @@ public abstract class Level extends Layer{
 
 		for(int y = 0; y < level.HEIGHT; y++){
 			for(int x = 0; x < level.WIDTH; x++){
-				getTile(x, y).render(g);
+				tiles.get(x + y * WIDTH).render(x * TILE_SIZE, y * TILE_SIZE, g);
 			}
 		}
 
 		for(Entity e : entities){
 			e.render(g);
-			if(e instanceof Mob){
-				for(Projectile p : ((Mob) e).projectiles){
-					p.render(g);
-				}
-			}
 		}
 
-		for(Mob e : players){
-			e.render(g);
-			for(Projectile p : e.projectiles){
+		for(Mob m : mobs){
+			m.render(g);
+			for(Projectile p : m.projectiles){
 				p.render(g);
 
 			}
+		}
+		
+		for(Particle p : particles){
+			p.render(g);
 		}
 		g.translate(camera.camX, camera.camY);
 	}
@@ -98,13 +97,27 @@ public abstract class Level extends Layer{
 		return tiles.get(x + y * level.WIDTH);
 	}
 
-	public void addEntity(Entity entity){
+	public void add(Entity entity){
 		if(currentLevel == 0) return;
+
+		if(entity instanceof Mob){
+			mobs.add((Mob) entity);
+		}else if(entity instanceof Particle){
+			particles.add((Particle) entity);
+		}
+
 		entities.add(entity);
 	}
 
-	public void removeEntity(Entity entity){
+	public void remove(Entity entity){
 		if(currentLevel == 0) return;
+		
+		if(entity instanceof Mob){
+			mobs.remove((Mob) entity);
+		}else if(entity instanceof Particle){
+			particles.remove((Particle) entity);
+		}
+		
 		entities.remove(entity);
 	}
 

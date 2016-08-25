@@ -1,13 +1,14 @@
 package scibby.entities;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 public abstract class Entity{
 
 	public double x, y;
 
 	public int width, height;
+	
+	protected boolean removed = false;
 
 	public Entity(double x, double y, int width, int height){
 		this.x = x;
@@ -20,4 +21,8 @@ public abstract class Entity{
 
 	public abstract void render(Graphics2D g);
 
+	protected void remove(){
+		removed = true;
+	}
+	
 }

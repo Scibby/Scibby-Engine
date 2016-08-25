@@ -3,31 +3,27 @@ package scibby.entities;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public abstract class Tile extends Entity{
+import scibby.level.Level;
+
+public class Tile{
 
 	private BufferedImage image;
 
-	public Tile(int x, int y, int width, int height, BufferedImage image){
-		super(x, y, width, height);
-		this.image = image;
-	}
-
-	public Tile(int x, int y, int width, int height){
-		super(x, y, width, height);
-	}
+	private boolean solid;
 	
-	@Override
-	public abstract void tick();
+	public Tile(BufferedImage image, boolean solid){
+		this.image = image;
+		this.solid = solid;
+	}
 
-	@Override
-	public void render(Graphics2D g){
+	public void render(int x, int y, Graphics2D g){
 		if(image != null){
-			g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
+			g.drawImage(image, (int) x, (int) y, Level.getCurrentLevel().getTileSize(), Level.getCurrentLevel().getTileSize(), null);
 		}
 	}
 
 	public boolean isSolid(){
-		return false;
+		return solid;
 	}
 
 }
