@@ -42,7 +42,7 @@ public abstract class Projectile extends Entity{
 
 	protected boolean outOfRange(){
 		double dist;
-		dist = Math.sqrt(Math.abs((x - xOrigin) * (y - yOrigin) + (y - yOrigin) * (y - yOrigin)));
+		dist = Math.sqrt(Math.abs((x - xOrigin) * (x - xOrigin) + (y - yOrigin) * (y - yOrigin)));
 		if(dist > range) return true;
 		return false;
 	}
