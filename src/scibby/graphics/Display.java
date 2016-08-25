@@ -5,10 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
 
 import scibby.core.GameContainer;
-import scibby.layer.Layer;
 import scibby.states.GameStateManager;
 
 public class Display extends Canvas{

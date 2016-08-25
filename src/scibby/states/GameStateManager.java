@@ -3,8 +3,6 @@ package scibby.states;
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 
-import scibby.core.GameContainer;
-
 public class GameStateManager{
 
 	private static LinkedList<State> stateList = new LinkedList<State>();
@@ -12,7 +10,7 @@ public class GameStateManager{
 	public static int currentState;
 
 	private GameStateManager(){}
-	
+
 	public static void tick(){
 		for(int i = 0; i < stateList.size(); i++){
 			if(stateList.get(i).getID() == currentState){
@@ -41,5 +39,5 @@ public class GameStateManager{
 		if(stateList.isEmpty()) return null;
 		return stateList.get(currentState);
 	}
-	
+
 }

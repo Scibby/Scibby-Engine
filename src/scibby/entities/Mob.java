@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import scibby.core.GameMain;
+import scibby.events.Event;
 import scibby.level.Level;
 
 public abstract class Mob extends Entity{
@@ -29,6 +29,9 @@ public abstract class Mob extends Entity{
 		}
 	}
 
+	public void onEvent(Event event){
+	}
+	
 	@Override
 	public void render(Graphics2D g){
 		if(image != null){

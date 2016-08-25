@@ -3,7 +3,6 @@ package scibby.level;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 import scibby.entities.Entity;
 import scibby.entities.Mob;
@@ -27,8 +26,8 @@ public abstract class Level extends Layer{
 
 	protected ArrayList<Entity> entities = new ArrayList<Entity>();
 
-	protected ArrayList<Entity> players = new ArrayList<Entity>();
-	
+	protected ArrayList<Mob> players = new ArrayList<Mob>();
+
 	protected HashMap<Integer, Tile> tiles = new HashMap<Integer, Tile>();
 
 	protected Camera camera;
@@ -52,6 +51,15 @@ public abstract class Level extends Layer{
 				level.camera.tick((Mob) e);
 			}
 		}
+		for(Mob e : players){
+			e.tick();
+			for(int i = 0; i < e.projectiles.size(); i++){
+				if(e.projectiles.get(i).removed){
+					e.projectiles.remove(e.projectiles.get(i));
+				}
+			}
+			level.camera.tick(e);
+		}
 	}
 
 	public void render(Graphics2D g){
@@ -72,9 +80,17 @@ public abstract class Level extends Layer{
 				}
 			}
 		}
+
+		for(Mob e : players){
+			e.render(g);
+			for(Projectile p : e.projectiles){
+				p.render(g);
+
+			}
+		}
 		g.translate(camera.camX, camera.camY);
 	}
-	
+
 	@Override
 	public abstract void onEvent(Event event);
 
@@ -91,7 +107,7 @@ public abstract class Level extends Layer{
 		if(currentLevel == 0) return;
 		entities.remove(entity);
 	}
-	
+
 	public static void addLevel(Level level){
 		levels.add(level);
 	}
@@ -104,15 +120,15 @@ public abstract class Level extends Layer{
 	public static Level getCurrentLevel(){
 		return level;
 	}
-	
+
 	public Camera getCamera(){
 		return camera;
 	}
-	
+
 	public int getTileSize(){
 		return TILE_SIZE;
 	}
-	
+
 	public int getHeight(){
 		return HEIGHT;
 	}

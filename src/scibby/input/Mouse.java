@@ -18,6 +18,12 @@ public class Mouse implements MouseInputListener{
 	@Deprecated
 	private static boolean buttons[] = new boolean[65535];
 
+	@Deprecated
+	private static int mx;
+
+	@Deprecated
+	private static int my;
+	
 	private EventListener listener;
 	
 	public Mouse(EventListener listener){
@@ -41,6 +47,8 @@ public class Mouse implements MouseInputListener{
 	@Override
 	public void mouseMoved(MouseEvent e){
 		MOUSE.setLocation(e.getX(), e.getY());
+		mx = e.getX();
+		my = e.getY();
 		MouseMovedEvent event = new MouseMovedEvent(e.getX(), e.getY(), false);
 		listener.onEvent(event);
 	}
@@ -48,8 +56,18 @@ public class Mouse implements MouseInputListener{
 	@Override
 	public void mouseDragged(MouseEvent e){
 		MOUSE.setLocation(e.getX(), e.getY());
+		mx = e.getX();
+		my = e.getY();
 		MouseMovedEvent event = new MouseMovedEvent(e.getX(), e.getY(), true);
 		listener.onEvent(event);
+	}
+	
+	public static int getX(){
+		return mx;
+	}
+	
+	public static int getY(){
+		return my;
 	}
 
 	@Deprecated

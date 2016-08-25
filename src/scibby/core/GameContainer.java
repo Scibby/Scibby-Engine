@@ -1,7 +1,5 @@
 package scibby.core;
 
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 
 import scibby.events.Event;
@@ -9,9 +7,8 @@ import scibby.events.EventListener;
 import scibby.graphics.Display;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
-import scibby.layer.Layer;
-import scibby.level.Level;
 import scibby.states.GameStateManager;
+import scibby.ui.UIManager;
 
 public class GameContainer extends JFrame implements Runnable, EventListener{
 
@@ -28,6 +25,8 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 	private final String TITLE;
 
 	private Display disp;
+	
+	private static UIManager uiManager;
 	
 	public GameContainer(int width, int height, int maxFrames, String title){
 		this.width = width;
@@ -47,6 +46,9 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 		disp = new Display(width, height, this);
 		add(disp);
 		pack();
+		
+		uiManager = new UIManager(this);
+		
 		Mouse mouse = new Mouse(this);
 		disp.addMouseListener(mouse);
 		disp.addMouseMotionListener(mouse);
@@ -117,6 +119,10 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 
 	public Display getDisp(){
 		return disp;
+	}
+	
+	static UIManager getUI(){
+		return uiManager;
 	}
 	
 	public String getTitle(){

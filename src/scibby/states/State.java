@@ -15,6 +15,8 @@ public abstract class State{
 		this.stateId = stateId;
 	}
 
+	public void start(){}
+
 	public void tick(){
 		for(int i = 0; i < layers.size(); i++){
 			layers.get(i).tick();
@@ -32,7 +34,7 @@ public abstract class State{
 			layers.get(i).onEvent(event);
 		}
 	}
-	
+
 	public void addLayer(Layer layer){
 		layers.add(layer);
 	}
@@ -41,6 +43,14 @@ public abstract class State{
 		layers.remove(layer);
 	}
 
+	public void clearLayers(){
+		layers.clear();
+	}
+
+	public ArrayList<Layer> getLayers(){
+		return layers;
+	}
+	
 	public int getID(){
 		return stateId;
 	}

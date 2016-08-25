@@ -16,5 +16,5 @@ public class Event{
 	public Type getType(){
 		return type;
 	}
-
+	
 }
