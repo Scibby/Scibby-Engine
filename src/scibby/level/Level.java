@@ -46,19 +46,27 @@ public abstract class Level extends Layer{
 		for(Entity e : entities){
 			e.tick();
 		}
-		
-		for(Mob e : mobs){
-			e.tick();
-			for(int i = 0; i < e.projectiles.size(); i++){
-				if(e.projectiles.get(i).removed){
-					e.projectiles.remove(e.projectiles.get(i));
+
+		for(int i = 0; i < mobs.size(); i++){
+			Mob m = mobs.get(i);
+
+			m.tick();
+			for(int j = 0; j < m.projectiles.size(); j++){
+				if(m.projectiles.get(j).isRemoved()){
+					m.projectiles.remove(j);
 				}
 			}
-			level.camera.tick(e);
 		}
-		
-		for(Particle p : particles){
+
+		level.camera.tick(mobs.get(0));
+
+		for(int i = 0; i < particles.size(); i++){
+			Particle p = particles.get(i);
+
 			p.tick();
+			if(p.isRemoved()){
+				particles.remove(i);
+			}
 		}
 	}
 
@@ -80,11 +88,12 @@ public abstract class Level extends Layer{
 			m.render(g);
 			for(Projectile p : m.projectiles){
 				p.render(g);
-
 			}
 		}
-		
-		for(Particle p : particles){
+
+		System.out.println(particles.size());
+		for(int i = 0; i < particles.size(); i++){
+			Particle p = particles.get(i);
 			p.render(g);
 		}
 		g.translate(camera.camX, camera.camY);
@@ -104,21 +113,21 @@ public abstract class Level extends Layer{
 			mobs.add((Mob) entity);
 		}else if(entity instanceof Particle){
 			particles.add((Particle) entity);
+		}else{
+			entities.add(entity);
 		}
-
-		entities.add(entity);
 	}
 
 	public void remove(Entity entity){
 		if(currentLevel == 0) return;
-		
+
 		if(entity instanceof Mob){
 			mobs.remove((Mob) entity);
 		}else if(entity instanceof Particle){
 			particles.remove((Particle) entity);
+		}else{
+			entities.remove(entity);
 		}
-		
-		entities.remove(entity);
 	}
 
 	public static void addLevel(Level level){

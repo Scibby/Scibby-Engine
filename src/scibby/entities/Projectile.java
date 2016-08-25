@@ -14,7 +14,6 @@ public abstract class Projectile extends Entity{
 	private double angle;
 	private int range;
 	private BufferedImage image;
-	public boolean removed = false;
 
 	public Projectile(double x, double y, int width, int height, double angle, int range, Mob shooter, BufferedImage image){
 		super(x, y, width, height);
@@ -71,10 +70,6 @@ public abstract class Projectile extends Entity{
 		if(image != null){
 			g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
 		}
-	}
-
-	protected void remove(){
-		removed = true;
 	}
 
 }

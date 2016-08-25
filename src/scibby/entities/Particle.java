@@ -26,8 +26,8 @@ public class Particle extends Entity{
 	public void tick(){
 		x += nx;
 		y += ny;
-		time++;
-		if(time >= life){
+		life--;
+		if(life <= 0){
 			remove();
 		}
 	}
