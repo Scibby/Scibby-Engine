@@ -52,7 +52,7 @@ public abstract class Level extends Layer{
 			}
 			for(int j = 0; j < m.projectiles.size(); j++){
 				if(m.projectiles.get(j).isRemoved()){
-					remove(m.projectiles.get(j));
+					m.projectiles.remove(j);
 				}
 			}
 		}

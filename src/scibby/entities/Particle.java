@@ -52,9 +52,9 @@ public class Particle extends Entity{
 		}
 		
 		if(isColliding(xa, ya)){
-			this.xa *= -1.0;
-			this.ya *= -1.0;
-			this.za *= -1.0;
+			this.xa *= -0.8;
+			this.ya *= -0.8;
+			this.za *= -0.8;
 		}
 	}
 
