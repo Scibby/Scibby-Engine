@@ -18,10 +18,6 @@ public abstract class Mob extends Entity{
 		this.image = image;
 	}
 
-	public Mob(int x, int y, int width, int height){
-		super(x, y, width, height);
-	}
-
 	@Override
 	public void tick(){
 		for(Projectile p : projectiles){

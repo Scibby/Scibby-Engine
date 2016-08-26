@@ -12,6 +12,7 @@ import scibby.entities.Tile;
 import scibby.events.Event;
 import scibby.graphics.Camera;
 import scibby.layer.Layer;
+import scibby.util.Vector2i;
 
 public abstract class Level extends Layer{
 
@@ -24,8 +25,6 @@ public abstract class Level extends Layer{
 	protected final int TILE_SIZE;
 
 	private static ArrayList<Level> levels = new ArrayList<Level>();
-
-	protected ArrayList<Entity> entities = new ArrayList<Entity>();
 
 	protected ArrayList<Particle> particles = new ArrayList<Particle>();
 
@@ -43,17 +42,17 @@ public abstract class Level extends Layer{
 	}
 
 	public void tick(){
-		for(Entity e : entities){
-			e.tick();
-		}
 
 		for(int i = 0; i < mobs.size(); i++){
 			Mob m = mobs.get(i);
 
 			m.tick();
+			if(m.isRemoved()){
+				remove(m);
+			}
 			for(int j = 0; j < m.projectiles.size(); j++){
 				if(m.projectiles.get(j).isRemoved()){
-					m.projectiles.remove(j);
+					remove(m.projectiles.get(j));
 				}
 			}
 		}
@@ -65,7 +64,7 @@ public abstract class Level extends Layer{
 
 			p.tick();
 			if(p.isRemoved()){
-				particles.remove(p);
+				remove(p);
 			}
 		}
 	}
@@ -78,10 +77,6 @@ public abstract class Level extends Layer{
 			for(int x = 0; x < level.WIDTH; x++){
 				tiles.get(x + y * WIDTH).render(x * TILE_SIZE, y * TILE_SIZE, g);
 			}
-		}
-
-		for(Entity e : entities){
-			e.render(g);
 		}
 
 		for(Mob m : mobs){
@@ -105,6 +100,21 @@ public abstract class Level extends Layer{
 		return tiles.get(x + y * level.WIDTH);
 	}
 
+	public ArrayList<Mob> getMobsInRadius(Entity e, int radius){
+		ArrayList<Mob> result = new ArrayList<Mob>();
+
+		for(int i = 0; i < mobs.size(); i++){
+			Mob mob = mobs.get(i);
+			int distance = Vector2i.getDistance(new Vector2i((int) e.x + e.width / 2, (int) e.y + e.height / 2),
+					new Vector2i((int) mob.x + mob.width / 2, (int) mob.y + mob.height / 2));
+			if(distance <= radius){
+				result.add(mob);
+			}
+		}
+
+		return result;
+	}
+
 	public void add(Entity entity){
 		if(currentLevel == 0) return;
 
@@ -112,8 +122,6 @@ public abstract class Level extends Layer{
 			mobs.add((Mob) entity);
 		}else if(entity instanceof Particle){
 			particles.add((Particle) entity);
-		}else{
-			entities.add(entity);
 		}
 	}
 
@@ -124,8 +132,6 @@ public abstract class Level extends Layer{
 			mobs.remove((Mob) entity);
 		}else if(entity instanceof Particle){
 			particles.remove((Particle) entity);
-		}else{
-			entities.remove(entity);
 		}
 	}
 

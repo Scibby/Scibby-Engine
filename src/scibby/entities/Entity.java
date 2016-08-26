@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 public abstract class Entity{
 
 	public double x, y;
-
+	
 	public int width, height;
 	
 	protected boolean removed = false;
@@ -21,7 +21,7 @@ public abstract class Entity{
 
 	public abstract void render(Graphics2D g);
 
-	protected void remove(){
+	public void remove(){
 		removed = true;
 	}
 	

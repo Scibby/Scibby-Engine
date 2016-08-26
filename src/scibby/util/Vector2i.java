@@ -36,6 +36,16 @@ public class Vector2i{
 		return this;
 	}
 	
+	public Vector2i subtract(int subtraction){
+		this.x -= subtraction;
+		this.y -= subtraction;
+		return this;
+	}
+	
+	public static int getDistance(Vector2i vec1, Vector2i vec2){
+		return (int) Math.sqrt(Math.abs((vec1.x - vec2.x) * (vec1.x - vec2.x) + (vec1.y - vec2.y) * (vec1.y - vec2.y)));
+	}
+	
 	public Vector2i set(int x, int y){
 		this.x = x;
 		this.y = y;
