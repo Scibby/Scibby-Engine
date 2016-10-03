@@ -14,6 +14,8 @@ public class Particle extends Entity{
 	private Random random;
 
 	private int life;
+	
+	private Color colour = Color.GRAY;
 
 	public Particle(double x, double y, int width, int height, int life){
 		super(x, y, width, height);
@@ -60,7 +62,7 @@ public class Particle extends Entity{
 
 	@Override
 	public void render(Graphics2D g){
-		g.setColor(Color.GRAY);
+		g.setColor(colour);
 		g.fillRect((int) x, (int) ((int) y - z), width, height);
 	}
 
@@ -76,5 +78,9 @@ public class Particle extends Entity{
 			if(tile != null) return tile.isSolid();
 		}
 		return false;
+	}
+	
+	public void setColour(Color colour){
+		this.colour = colour;
 	}
 }
