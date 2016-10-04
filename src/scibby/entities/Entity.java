@@ -1,6 +1,6 @@
 package scibby.entities;
 
-import java.awt.Graphics2D;
+import scibby.graphics.Screen;
 
 public abstract class Entity{
 
@@ -19,7 +19,7 @@ public abstract class Entity{
 
 	public abstract void tick();
 
-	public abstract void render(Graphics2D g);
+	public abstract void render(Screen screen);
 
 	public void remove(){
 		removed = true;

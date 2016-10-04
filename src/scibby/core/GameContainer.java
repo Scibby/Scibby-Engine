@@ -66,6 +66,7 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 
 	@Override
 	public void run(){
+		
 		while(running){
 
 			long initialNanoTime = System.nanoTime();

@@ -1,21 +1,21 @@
 package scibby.entities;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import scibby.events.Event;
+import scibby.graphics.Screen;
+import scibby.graphics.Sprite;
 import scibby.level.Level;
 
 public abstract class Mob extends Entity{
 
-	protected BufferedImage image;
-
 	public ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-	public Mob(int x, int y, int width, int height, BufferedImage image){
+	protected Sprite sprite;
+	
+	public Mob(int x, int y, int width, int height, Sprite sprite){
 		super(x, y, width, height);
-		this.image = image;
+		this.sprite = sprite;
 	}
 
 	@Override
@@ -29,9 +29,9 @@ public abstract class Mob extends Entity{
 	}
 	
 	@Override
-	public void render(Graphics2D g){
-		if(image != null){
-			g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
+	public void render(Screen screen){
+		if(sprite != null){
+			screen.renderSprite((int) x, (int) y, sprite);
 		}
 	}
 

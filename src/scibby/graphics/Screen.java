@@ -21,5 +21,14 @@ public class Screen{
 			}
 		}
 	}
+	
+	public void renderSprite(int x, int y, Sprite sprite){
+		for(int yy = 0; yy < sprite.height; yy++){
+			for(int xx = 0; xx < sprite.width; xx++){
+				if(xx < 0 || xx >= this.width || yy < 0 || yy >= this.height) continue;
+				pixels[(xx + x) + (yy + y) * this.width] = sprite.pixels[xx + yy * sprite.width];
+			}
+		}
+	}
 
 }
