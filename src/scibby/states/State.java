@@ -1,9 +1,9 @@
 package scibby.states;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import scibby.events.Event;
+import scibby.graphics.Screen;
 import scibby.layer.Layer;
 
 public abstract class State{
@@ -23,9 +23,9 @@ public abstract class State{
 		}
 	}
 
-	public void render(Graphics2D g){
+	public void render(Screen screen){
 		for(int i = 0; i < layers.size(); i++){
-			layers.get(i).render(g);
+			layers.get(i).render(screen);
 		}
 	}
 

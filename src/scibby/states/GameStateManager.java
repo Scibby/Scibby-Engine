@@ -1,11 +1,12 @@
 package scibby.states;
 
-import java.awt.Graphics2D;
-import java.util.LinkedList;
+import java.util.ArrayList;
+
+import scibby.graphics.Screen;
 
 public class GameStateManager{
 
-	private static LinkedList<State> stateList = new LinkedList<State>();
+	private static ArrayList<State> stateList = new ArrayList<State>();
 
 	public static int currentState;
 
@@ -19,10 +20,10 @@ public class GameStateManager{
 		}
 	}
 
-	public static void render(Graphics2D g){
+	public static void render(Screen screen){
 		for(int i = 0; i < stateList.size(); i++){
 			if(stateList.get(i).getID() == currentState){
-				stateList.get(i).render(g);
+				stateList.get(i).render(screen);
 			}
 		}
 	}

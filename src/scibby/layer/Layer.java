@@ -1,20 +1,16 @@
 package scibby.layer;
 
-import java.awt.Graphics2D;
-
 import scibby.events.Event;
 import scibby.events.EventListener;
+import scibby.graphics.Screen;
 
 public class Layer implements EventListener{
 
 	@Override
-	public void onEvent(Event event){
-	}
+	public void onEvent(Event event){}
 
-	public void tick(){
-	}
-	
-	public void render(Graphics2D g){
-	}
-	
+	public void tick(){}
+
+	public void render(Screen screen){}
+
 }

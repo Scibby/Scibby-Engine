@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import scibby.events.Event;
 import scibby.events.EventListener;
+import scibby.graphics.Display;
 import scibby.graphics.Screen;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
@@ -24,7 +25,7 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 
 	private final String TITLE;
 
-	private Screen screen;
+	private Display disp;
 	
 	private static UIManager uiManager;
 	
@@ -43,16 +44,16 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 	}
 
 	private void init(){
-		screen = new Screen(width, height, this);
-		add(screen);
+		disp = new Display(width, height, this);
+		add(disp);
 		pack();
 		
 		uiManager = new UIManager(this);
 		
 		Mouse mouse = new Mouse(this);
-		screen.addMouseListener(mouse);
-		screen.addMouseMotionListener(mouse);
-		screen.addKeyListener(new Keyboard());
+		disp.addMouseListener(mouse);
+		disp.addMouseMotionListener(mouse);
+		disp.addKeyListener(new Keyboard());
 	}
 	
 	public void onEvent(Event event){
@@ -77,7 +78,7 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 				long now = System.nanoTime();
 				delta += (now - initialNanoTime) / ticksPerSecond;
 				initialNanoTime = now;
-				screen.render();
+				disp.render();
 				frames++;
 				if(delta >= 1){
 					tick();
@@ -115,10 +116,6 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 		}
 
 		System.exit(1);
-	}
-
-	public Screen getScreen(){
-		return screen;
 	}
 	
 	static UIManager getUI(){
