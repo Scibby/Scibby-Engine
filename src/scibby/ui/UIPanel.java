@@ -1,9 +1,9 @@
 package scibby.ui;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import scibby.events.Event;
+import scibby.graphics.Screen;
 import scibby.util.Vector2i;
 
 public class UIPanel{
@@ -39,9 +39,9 @@ public class UIPanel{
 		}
 	}
 	
-	public void render(Graphics2D g){
+	public void render(Screen screen){
 		for(UIComponent component : components){
-			component.render(g);
+			component.render(screen);
 		}
 	}
 

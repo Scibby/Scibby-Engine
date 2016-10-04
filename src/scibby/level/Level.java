@@ -1,6 +1,5 @@
 package scibby.level;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,6 +10,7 @@ import scibby.entities.Projectile;
 import scibby.entities.Tile;
 import scibby.events.Event;
 import scibby.graphics.Camera;
+import scibby.graphics.Screen;
 import scibby.layer.Layer;
 import scibby.util.Vector2i;
 
@@ -58,6 +58,7 @@ public abstract class Level extends Layer{
 		}
 
 		level.camera.tick(mobs.get(0));
+		System.out.println(mobs.size());
 
 		for(int i = 0; i < particles.size(); i++){
 			Particle p = particles.get(i);
@@ -69,28 +70,31 @@ public abstract class Level extends Layer{
 		}
 	}
 
-	public void render(Graphics2D g){
+	public void render(Screen screen){
 
-		g.translate(-camera.camX, -camera.camY);
+		screen.setOffsets(-camera.camX, -camera.camY);
 
 		for(int y = 0; y < level.HEIGHT; y++){
 			for(int x = 0; x < level.WIDTH; x++){
-				tiles.get(x + y * WIDTH).render(x * TILE_SIZE, y * TILE_SIZE, g);
+				Tile tile = tiles.get(x + y * WIDTH);
+				if(tile != null){
+					tile.render(x * TILE_SIZE, y * TILE_SIZE, screen);
+				}
 			}
 		}
 
 		for(Mob m : mobs){
-			m.render(g);
+			m.render(screen);
 			for(Projectile p : m.projectiles){
-				p.render(g);
+				p.render(screen);
 			}
 		}
 
 		for(int i = 0; i < particles.size(); i++){
 			Particle p = particles.get(i);
-			p.render(g);
+			p.render(screen);
 		}
-		g.translate(camera.camX, camera.camY);
+		screen.setOffsets(camera.camX, camera.camY);
 	}
 
 	@Override

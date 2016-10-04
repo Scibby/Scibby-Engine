@@ -1,11 +1,11 @@
 package scibby.ui;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import scibby.core.Game;
 import scibby.events.Event;
 import scibby.events.EventListener;
+import scibby.graphics.Screen;
 import scibby.layer.Layer;
 
 public class UIManager extends Layer{
@@ -18,15 +18,17 @@ public class UIManager extends Layer{
 		this.listener = listener;
 	}
 
+	@Override
 	public void tick(){
 		for(UIPanel panel : panels){
 			panel.tick();
 		}
 	}
 
-	public void render(Graphics2D g){
+	@Override
+	public void render(Screen screen){
 		for(UIPanel panel : panels){
-			panel.render(g);
+			panel.render(screen);
 		}
 	}
 

@@ -1,8 +1,6 @@
 package scibby.ui.components;
 
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 import scibby.events.Event;
@@ -10,6 +8,7 @@ import scibby.events.EventDispatcher;
 import scibby.events.types.MouseMovedEvent;
 import scibby.events.types.MousePressedEvent;
 import scibby.events.types.MouseReleasedEvent;
+import scibby.graphics.Screen;
 import scibby.ui.UIActionListener;
 import scibby.ui.UIButtonListener;
 import scibby.ui.UIComponent;
@@ -20,13 +19,16 @@ public class UIButton extends UIComponent{
 
 	private UIActionListener actionListener;
 
-	private UIButtonListener buttonListener = new UIButtonListener(){};
+	private UIButtonListener buttonListener = new UIButtonListener(){
+	};
 
 	private UILabel label;
 
 	private boolean inside = false;
 	private boolean pressed = false;
-	
+
+	private int colour = 0xdd00000;
+
 	public UIButton(Vector2i position, int width, int height, UIPanel parent, UIActionListener actionListener){
 		super(position, width, height, parent);
 		this.actionListener = actionListener;
@@ -66,10 +68,8 @@ public class UIButton extends UIComponent{
 	}
 
 	private boolean onMousePressed(MousePressedEvent e){
-		int mx = e.getX();
-		int my = e.getY();
 		int button = e.getButton();
-		
+
 		if(inside && button == MouseEvent.BUTTON1 && !pressed){
 			buttonListener.buttonPressed(this);
 			pressed = true;
@@ -78,19 +78,16 @@ public class UIButton extends UIComponent{
 
 		return false;
 	}
-	
+
 	private boolean onMouseReleased(MouseReleasedEvent e){
-		int mx = e.getX();
-		int my = e.getY();
-		int button = e.getButton();
-		
+
 		if(pressed){
 			if(inside) actionListener.onAction();
 			buttonListener.buttonReleased(this);
 			pressed = false;
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -99,9 +96,8 @@ public class UIButton extends UIComponent{
 	}
 
 	@Override
-	public void render(Graphics2D g){
-		g.setColor(Color.RED);
-		g.drawRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height);
+	public void render(Screen screen){
+		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour);
 	}
 
 	public void setText(String text){
@@ -121,6 +117,10 @@ public class UIButton extends UIComponent{
 		h += y;
 
 		return ((w < x || w > xp) && (h < y || h > yp));
+	}
+
+	public void setColour(int colour){
+		this.colour = colour;
 	}
 
 }

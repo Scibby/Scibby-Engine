@@ -1,8 +1,8 @@
 package scibby.ui.components;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 
+import scibby.graphics.Screen;
 import scibby.ui.UIComponent;
 import scibby.ui.UIPanel;
 import scibby.util.MathsUtil;
@@ -14,8 +14,8 @@ public class UIProgressBar extends UIComponent{
 
 	private int value = 50;
 
-	private Color bColour = Color.RED.darker();
-	private Color fColour = Color.GREEN.darker();
+	private int bColour = Color.RED.darker().getRGB();
+	private int fColour = Color.GREEN.darker().getRGB();
 
 	public UIProgressBar(Vector2i position, int width, int height, UIPanel parent, int min, int max){
 		super(position, width, height, parent);
@@ -33,11 +33,9 @@ public class UIProgressBar extends UIComponent{
 	}
 
 	@Override
-	public void render(Graphics2D g){
-		g.setColor(bColour);
-		g.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height);
-		g.setColor(fColour);
-		g.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), (int) getFill(), height);
+	public void render(Screen screen){
+		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, bColour);
+		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), (int) getFill(), height, fColour);
 	}
 
 	public void setValue(int value){
@@ -48,11 +46,11 @@ public class UIProgressBar extends UIComponent{
 		return value;
 	}
 	
-	public void setBackgroundColour(Color bColour){
+	public void setBackgroundColour(int bColour){
 		this.bColour = bColour;
 	}
 	
-	public void setForegroundColour(Color fColour){
+	public void setForegroundColour(int fColour){
 		this.fColour = fColour;
 	}
 

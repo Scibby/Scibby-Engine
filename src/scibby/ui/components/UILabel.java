@@ -1,10 +1,10 @@
 package scibby.ui.components;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics2D;
 
+import scibby.graphics.Display;
+import scibby.graphics.Screen;
 import scibby.ui.UIComponent;
 import scibby.ui.UIPanel;
 import scibby.util.Vector2i;
@@ -16,6 +16,8 @@ public class UILabel extends UIComponent{
 	private Font font;
 
 	private UIButton parentButton;
+	
+	private int colour = 0x0000bb;
 	
 	public UILabel(Vector2i position, int width, int height, UIPanel parent, String text, Font font){
 		super(position, width, height, parent);
@@ -37,23 +39,25 @@ public class UILabel extends UIComponent{
 	}
 	
 	@Override
-	public void render(Graphics2D g){
-		super.render(g);
-		g.setColor(Color.RED);
-		g.setFont(font);
+	public void render(Screen screen){
+		super.render(screen);
 
 		FontMetrics fm;
 
-		fm = g.getFontMetrics(font);
+		fm = Display.getG().getFontMetrics(font);
 
 		if(text == null) return;
 		else if(parentButton != null){
-			g.drawString(text, parentButton.getAbsolutePosition().getX() + parentButton.width / 2 - (fm.stringWidth(text) / 2),
-					parentButton.getAbsolutePosition().getY() + parentButton.height / 2 + 12);
+			screen.drawString(text, parentButton.getAbsolutePosition().getX() + parentButton.width / 2 - (fm.stringWidth(text) / 2),
+					parentButton.getAbsolutePosition().getY() + parentButton.height / 2 + 12, font, colour);
 		}else{
-			g.drawString(text, getAbsolutePosition().getX(), getAbsolutePosition().getY());
+			screen.drawString(text, getAbsolutePosition().getX(), getAbsolutePosition().getY(), font,  colour);
 		}
 		
+	}
+	
+	public void setColour(int colour){
+		this.colour = colour;
 	}
 
 }

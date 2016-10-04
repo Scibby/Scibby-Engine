@@ -16,28 +16,30 @@ public class Display extends Canvas{
 	private int width;
 
 	private int height;
-	
+
 	private BufferedImage image;
 	public int[] pixels;
-	
+
 	private Screen screen;
 	
+	private static Graphics2D g;
+
 	public Display(int width, int height, GameContainer gc){
 
 		this.width = width;
 		this.height = height;
-				
+
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-		
+
 		screen = new Screen(width, height, pixels);
-		
+
 		Dimension dim = new Dimension(width, height);
 		setMinimumSize(dim);
 		setPreferredSize(dim);
 		setMaximumSize(dim);
 	}
-	
+
 	public void render(){
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null){
@@ -45,7 +47,7 @@ public class Display extends Canvas{
 			return;
 		}
 
-		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+		g = (Graphics2D) bs.getDrawGraphics();
 
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, width, height);
@@ -53,9 +55,18 @@ public class Display extends Canvas{
 		GameStateManager.getCurrentState().render(screen);
 
 		g.drawImage(image, 0, 0, null);
+
+		for(int i = 0; i < pixels.length; i++){
+			pixels[i] = 0;
+		}
+
 		g.dispose();
 
 		bs.show();
+	}
+
+	public static Graphics2D getG(){
+		return g;
 	}
 	
 }

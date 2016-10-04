@@ -1,24 +1,22 @@
 package scibby.entities;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-import scibby.level.Level;
+import scibby.graphics.Screen;
+import scibby.graphics.Sprite;
 
 public class Tile{
 
-	private BufferedImage image;
+	private Sprite sprite;
 
 	private boolean solid;
 	
-	public Tile(BufferedImage image, boolean solid){
-		this.image = image;
+	public Tile(Sprite sprite, boolean solid){
+		this.sprite = sprite;
 		this.solid = solid;
 	}
 
-	public void render(int x, int y, Graphics2D g){
-		if(image != null){
-			g.drawImage(image, (int) x, (int) y, Level.getCurrentLevel().getTileSize(), Level.getCurrentLevel().getTileSize(), null);
+	public void render(int x, int y, Screen screen){
+		if(sprite != null){
+			screen.renderSprite(x, y, sprite);
 		}
 	}
 

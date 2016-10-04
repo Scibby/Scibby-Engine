@@ -1,8 +1,7 @@
 package scibby.entities;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
+import scibby.graphics.Screen;
+import scibby.graphics.Sprite;
 import scibby.level.Level;
 
 public abstract class Projectile extends Entity{
@@ -13,16 +12,16 @@ public abstract class Projectile extends Entity{
 	protected double nx, ny;
 	protected double angle;
 	protected int range;
-	protected BufferedImage image;
+	protected Sprite sprite;
 
-	public Projectile(double x, double y, int width, int height, double angle, int range, Mob shooter, BufferedImage image){
+	public Projectile(double x, double y, int width, int height, double angle, int range, Mob shooter, Sprite sprite){
 		super(x, y, width, height);
 		xOrigin = (int) x;
 		yOrigin = (int) y;
 		this.shooter = shooter;
 		this.angle = angle;
 		this.range = range;
-		this.image = image;
+		this.sprite = sprite;
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -66,10 +65,10 @@ public abstract class Projectile extends Entity{
 	}
 
 	@Override
-	public void render(Graphics2D g){
-		if(image != null){
-			g.drawImage(image, (int) x, (int) y, (int) width, (int) height, null);
-		}
+	public void render(Screen screen){
+		if(sprite != null){	
+			screen.renderSprite((int) x, (int) y, sprite);
+		}		
 	}
 
 }

@@ -1,9 +1,8 @@
 package scibby.entities;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.Random;
 
+import scibby.graphics.Screen;
 import scibby.level.Level;
 
 public class Particle extends Entity{
@@ -14,8 +13,8 @@ public class Particle extends Entity{
 	private Random random;
 
 	private int life;
-	
-	private Color colour = Color.GRAY;
+
+	private int colour = 0x808080;
 
 	public Particle(double x, double y, int width, int height, int life){
 		super(x, y, width, height);
@@ -36,23 +35,23 @@ public class Particle extends Entity{
 	@Override
 	public void tick(){
 		za -= 0.1;
-		
+
 		if(z <= 0){
 			z = 0;
 			za *= -0.8;
 			xa *= 0.9;
 			ya *= 0.9;
 		}
-		
+
 		x += xa;
 		y += ya;
 		z += za;
-		
+
 		life--;
 		if(life <= 0){
 			remove();
 		}
-		
+
 		if(isColliding(xa, ya)){
 			this.xa *= -0.8;
 			this.ya *= -0.8;
@@ -61,9 +60,8 @@ public class Particle extends Entity{
 	}
 
 	@Override
-	public void render(Graphics2D g){
-		g.setColor(colour);
-		g.fillRect((int) x, (int) ((int) y - z), width, height);
+	public void render(Screen screen){
+		screen.fillRect((int) x, (int) y, width, height, colour);
 	}
 
 	protected boolean isColliding(double xa, double ya){
@@ -79,8 +77,8 @@ public class Particle extends Entity{
 		}
 		return false;
 	}
-	
-	public void setColour(Color colour){
+
+	public void setColour(int colour){
 		this.colour = colour;
 	}
 }

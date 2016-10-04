@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import scibby.events.Event;
 import scibby.events.EventListener;
 import scibby.graphics.Display;
-import scibby.graphics.Screen;
 import scibby.input.Keyboard;
 import scibby.input.Mouse;
 import scibby.states.GameStateManager;
