@@ -34,8 +34,8 @@ public class Camera{
 
 	public void tick(Mob player){
 		if(useCamera){
-			camX = (int) (player.x - viewSizeX / 2);
-			camY = (int) (player.y - viewSizeY / 2);
+			camX = (int) (player.x + (player.width / 2) - viewSizeX / 2);
+			camY = (int) (player.y  + (player.height / 2) - viewSizeY / 2);
 		}
 		
 		if(camX > offsetMaxX) camX = offsetMaxX;

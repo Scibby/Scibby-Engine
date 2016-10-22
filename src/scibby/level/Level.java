@@ -58,7 +58,6 @@ public abstract class Level extends Layer{
 		}
 
 		level.camera.tick(mobs.get(0));
-		System.out.println(mobs.size());
 
 		for(int i = 0; i < particles.size(); i++){
 			Particle p = particles.get(i);
@@ -94,7 +93,7 @@ public abstract class Level extends Layer{
 			Particle p = particles.get(i);
 			p.render(screen);
 		}
-		screen.setOffsets(camera.camX, camera.camY);
+		//screen.setOffsets(camera.camX, camera.camY);
 	}
 
 	@Override

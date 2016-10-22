@@ -31,7 +31,7 @@ public abstract class Mob extends Entity{
 	@Override
 	public void render(Screen screen){
 		if(sprite != null){
-			screen.renderSprite((int) x, (int) y, sprite);
+			screen.renderSprite(x, y, sprite);
 		}
 	}
 

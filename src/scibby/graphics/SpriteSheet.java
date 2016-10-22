@@ -26,7 +26,7 @@ public class SpriteSheet{
 
 		for(int yy = 0; yy < height; yy++){
 			for(int xx = 0; xx < width; xx++){
-				spritePixels[xx + yy * width] = pixels[(xx + x) + (yy + y) * this.width];
+				spritePixels[xx + yy * width] = pixels[(xx + (x * width)) + (yy + (y * height)) * this.width];
 			}
 		}
 
