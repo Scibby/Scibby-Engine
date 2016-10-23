@@ -61,7 +61,7 @@ public class Particle extends Entity{
 
 	@Override
 	public void render(Screen screen){
-		screen.fillRect((int) x, (int) y, width, height, colour);
+		screen.fillRect((int) x, (int) y, width, height, colour, false);
 	}
 
 	protected boolean isColliding(double xa, double ya){

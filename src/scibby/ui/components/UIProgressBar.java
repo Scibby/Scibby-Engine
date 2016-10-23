@@ -34,8 +34,8 @@ public class UIProgressBar extends UIComponent{
 
 	@Override
 	public void render(Screen screen){
-		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, bColour);
-		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), (int) getFill(), height, fColour);
+		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, bColour, true);
+		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), (int) getFill(), height, fColour, true);
 	}
 
 	public void setValue(int value){
