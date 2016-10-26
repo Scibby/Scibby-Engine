@@ -23,12 +23,16 @@ public class Screen{
 	public void fillRect(int x, int y, int width, int height, int colour, boolean fixed){
 		if(!fixed){
 			x -= xOffset;
-			y -= yOffset;			
+			y -= yOffset;
 		}
-		for(int yy = y; yy < y + height; yy++){
-			for(int xx = x; xx < x + width; xx++){
-				if(xx + x < 0 || xx + x >= this.width + xOffset || yy + y < 0 || yy + y >= this.height) continue;
-				pixels[xx + yy * this.width] = colour;
+
+		for(int yy = 0; yy < height; yy++){
+			int yo = y + yy;
+			if(yo < 0 || yo >= this.height) continue;
+			for(int xx = 0; xx < width; xx++){
+				int xo = x + xx;
+				if(xo < 0 || xo >= this.width) continue;
+				pixels[xo + yo * this.width] = colour;
 			}
 		}
 	}
@@ -44,20 +48,20 @@ public class Screen{
 			}
 		}
 	}
-	
+
 	public void renderSprite(double x, double y, Sprite sprite){
 		renderSprite((int) x, (int) y, sprite);
 	}
-	
+
 	public void drawString(String text, int x, int y, Font font, int colour){
 		Graphics2D g = Display.getG();
-		
+
 		g.setFont(font);
 		g.setColor(new Color(colour));
-		
+
 		g.drawString(text, x, y);
 	}
-	
+
 	public void setOffsets(int xOffset, int yOffset){
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
