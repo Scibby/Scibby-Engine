@@ -22,8 +22,8 @@ public class Screen{
 
 	public void fillRect(int x, int y, int width, int height, int colour, boolean fixed){
 		if(!fixed){
-			x += xOffset;
-			y += yOffset;			
+			x -= xOffset;
+			y -= yOffset;			
 		}
 		for(int yy = y; yy < y + height; yy++){
 			for(int xx = x; xx < x + width; xx++){
@@ -34,8 +34,8 @@ public class Screen{
 	}
 
 	public void renderSprite(int x, int y, Sprite sprite){
-		x += xOffset;
-		y += yOffset;
+		x -= xOffset;
+		y -= yOffset;
 		if(sprite == null) return;
 		for(int yy = 0; yy < sprite.height; yy++){
 			for(int xx = 0; xx < sprite.width; xx++){

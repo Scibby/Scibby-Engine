@@ -70,8 +70,8 @@ public abstract class Level extends Layer{
 	}
 
 	public void render(Screen screen){
-
-		screen.setOffsets(-camera.camX, -camera.camY);
+		
+		screen.setOffsets(camera.camX, camera.camY);
 
 		for(int y = 0; y < level.HEIGHT; y++){
 			for(int x = 0; x < level.WIDTH; x++){
@@ -93,7 +93,6 @@ public abstract class Level extends Layer{
 			Particle p = particles.get(i);
 			p.render(screen);
 		}
-		//screen.setOffsets(camera.camX, camera.camY);
 	}
 
 	@Override
