@@ -52,6 +52,14 @@ public class Screen{
 	public void renderSprite(double x, double y, Sprite sprite){
 		renderSprite((int) x, (int) y, sprite);
 	}
+	
+	public void renderAnimatedSprite(int x, int y, AnimatedSprite animSprite){
+		renderSprite(x, y, animSprite.getCurrentSprite());
+	}
+	
+	public void renderAnimatedSprite(double x, double y, AnimatedSprite animSprite){
+		renderSprite((int) x, (int) y, animSprite.getCurrentSprite());
+	}
 
 	public void drawString(String text, int x, int y, Font font, int colour){
 		Graphics2D g = Display.getG();
