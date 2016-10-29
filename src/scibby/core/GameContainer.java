@@ -63,11 +63,12 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 		GameStateManager.getCurrentState().tick();
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void run(){
 		
 		while(running){
-
+			
 			long initialNanoTime = System.nanoTime();
 			double ticksPerSecond = 1000000000 / maxFrames;
 			double delta = 0;
@@ -94,7 +95,6 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 				}
 			}
 		}
-
 	}
 
 	public synchronized void start(){
