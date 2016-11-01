@@ -5,9 +5,9 @@ import java.awt.event.MouseEvent;
 
 import scibby.events.Event;
 import scibby.events.EventDispatcher;
-import scibby.events.types.MouseMovedEvent;
-import scibby.events.types.MousePressedEvent;
-import scibby.events.types.MouseReleasedEvent;
+import scibby.events.types.mouse.MouseMovedEvent;
+import scibby.events.types.mouse.MousePressedEvent;
+import scibby.events.types.mouse.MouseReleasedEvent;
 import scibby.graphics.Screen;
 import scibby.ui.UIActionListener;
 import scibby.ui.UIButtonListener;

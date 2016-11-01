@@ -52,7 +52,7 @@ public class GameContainer extends JFrame implements Runnable, EventListener{
 		Mouse mouse = new Mouse(this);
 		disp.addMouseListener(mouse);
 		disp.addMouseMotionListener(mouse);
-		disp.addKeyListener(new Keyboard());
+		disp.addKeyListener(new Keyboard(this));
 	}
 	
 	public void onEvent(Event event){
