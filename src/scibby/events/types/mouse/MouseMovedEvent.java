@@ -1,4 +1,4 @@
-package scibby.events.types;
+package scibby.events.types.mouse;
 
 import scibby.events.Event;
 

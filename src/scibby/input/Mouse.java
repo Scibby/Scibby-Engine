@@ -6,9 +6,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputListener;
 
 import scibby.events.EventListener;
-import scibby.events.types.MouseMovedEvent;
-import scibby.events.types.MousePressedEvent;
-import scibby.events.types.MouseReleasedEvent;
+import scibby.events.types.mouse.MouseMovedEvent;
+import scibby.events.types.mouse.MousePressedEvent;
+import scibby.events.types.mouse.MouseReleasedEvent;
 
 public class Mouse implements MouseInputListener{
 
