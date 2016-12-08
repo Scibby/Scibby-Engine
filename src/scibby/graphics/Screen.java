@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
+import scibby.util.MathsUtil;
+
 public class Screen{
 
 	private int width;
@@ -13,6 +15,8 @@ public class Screen{
 	private int yOffset;
 
 	private int[] pixels;
+	
+	private int[] lightMapPixels;
 
 	public Screen(int width, int height, int[] pixels){
 		this.width = width;
@@ -48,10 +52,23 @@ public class Screen{
 			}
 		}
 	}
+	
+	public void renderLight(int x, int y, int width, int height, int alpha){
+		x -= xOffset;
+		y -= yOffset;
+		alpha = MathsUtil.clamp(alpha, 0, 0xff);
+		for(int yy = 0; yy < height; yy++){
+			for(int xx = 0; xx < width; xx++){
+				if(xx + x < 0 || xx + x >= this.width || yy + y < 0 || yy + y >= this.height) continue;
+				lightMapPixels[(xx + x) + (yy + y) * this.width] = alpha << 24;
+			}
+		}
+	}
 
 	public void renderSprite(double x, double y, Sprite sprite){
 		renderSprite((int) x, (int) y, sprite);
 	}
+
 	
 	public void renderAnimatedSprite(int x, int y, AnimatedSprite animSprite){
 		renderSprite(x, y, animSprite.getCurrentSprite());
@@ -73,6 +90,10 @@ public class Screen{
 	public void setOffsets(int xOffset, int yOffset){
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
+	}
+	
+	public void setLightMapPixels(int[] lightMapPixels){
+		this.lightMapPixels = lightMapPixels;
 	}
 
 }
