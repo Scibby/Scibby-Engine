@@ -22,7 +22,7 @@ public class UIButton extends UIComponent{
 	private UIButtonListener buttonListener = new UIButtonListener(){
 	};
 
-	private UILabel label;
+	public UILabel label;
 
 	private boolean inside = false;
 	private boolean pressed = false;
@@ -97,11 +97,7 @@ public class UIButton extends UIComponent{
 
 	@Override
 	public void render(Screen screen){
-		screen.fillRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour, true);
-	}
-
-	public void setText(String text){
-		label.text = text;
+		screen.drawRect(getAbsolutePosition().getX(), getAbsolutePosition().getY(), width, height, colour, 4, true, true);
 	}
 
 	public boolean hasInside(int xp, int yp){
