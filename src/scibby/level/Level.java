@@ -57,7 +57,7 @@ public abstract class Level extends Layer{
 			}
 		}
 
-		level.camera.tick(mobs.get(0));
+		if(mobs.get(0) != null) level.camera.tick(mobs.get(0));
 
 		for(int i = 0; i < particles.size(); i++){
 			Particle p = particles.get(i);
@@ -71,7 +71,7 @@ public abstract class Level extends Layer{
 
 	public void render(Screen screen){
 		if(camera.useCamera){
-			screen.setOffsets(camera.camX, camera.camY);			
+			screen.setOffsets(camera.camX, camera.camY);
 		}
 
 		for(int y = 0; y < level.HEIGHT; y++){
